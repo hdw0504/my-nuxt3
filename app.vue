@@ -1,4 +1,11 @@
 <script setup>
+import { ID_INJECTION_KEY } from 'element-plus'
+
+provide(ID_INJECTION_KEY, {
+  prefix: 100,
+  current: 0,
+})
+
 useHead({
   title: 'Vitesse Nuxt 3',
   link: [
@@ -14,20 +21,3 @@ useHead({
     <NuxtPage />
   </NuxtLayout>
 </template>
-
-<style>
-html, body , #__nuxt{
-  height: 100vh;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  font-size: 16px;
-}
-
-html.dark {
-  background: #121212;
-  color: white;
-}
-</style>
