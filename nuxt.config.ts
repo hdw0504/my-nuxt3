@@ -5,6 +5,19 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@nuxtjs/color-mode',
   ],
+  components: {
+    dirs: [
+      '~/components',
+      '~/layoutComponents',
+      '~/pagesComponents',
+    ],
+  },
+  css: [
+    'assets/style/root.css',
+  ],
+  alias: {
+    style: '/<rootDir>/assets/style',
+  },
   experimental: {
     reactivityTransform: true,
   },

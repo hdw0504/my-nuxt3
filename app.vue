@@ -22,8 +22,12 @@ html, body , #__nuxt{
   padding: 0;
 }
 
+html {
+  font-size: 16px;
+}
+
 html.dark {
-  background: #222;
+  background: #121212;
   color: white;
 }
 </style>
