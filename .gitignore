@@ -4,4 +4,7 @@ dist
 .output
 .nuxt
 .env
+
 .history
+
+*.d.ts

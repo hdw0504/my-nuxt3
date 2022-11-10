@@ -1,3 +1,5 @@
+// import UnpluginComponentsVite from 'unplugin-vue-components/vite'
+
 export default defineNuxtConfig({
   modules: [
     '@vueuse/nuxt',
@@ -27,4 +29,13 @@ export default defineNuxtConfig({
   colorMode: {
     classSuffix: '',
   },
+
+  // vite plugins
+  // vite: {
+  //   plugins: [
+  //     UnpluginComponentsVite({
+  //       dts: true,
+  //     }),
+  //   ],
+  // },
 })
