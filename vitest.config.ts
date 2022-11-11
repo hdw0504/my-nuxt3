@@ -3,11 +3,12 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vitest/config'
 
-// https://github.com/Qiskit/saiba/blob/ed74ec7471c8ae481928ffd22d8e9f3bced02ed5/vitest.config.ts
 export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
+    // fix bug: Vitest was initialized with native Node instead of Vite Node
+    // https://github.com/nuxt/framework/issues/3252#issuecomment-1126771193
     deps: {
       inline: ['@nuxt/test-utils-edge'],
     },
@@ -18,13 +19,19 @@ export default defineConfig({
     },
   },
   plugins: [
+    // auto import vue、vueuse
     AutoImport({
       imports: ['vue', '@vueuse/core'],
       vueTemplate: true,
-      dts: true,
+      dts: true, // not matter
     }),
+    // auto import vue component
     Components({
-      dirs: ['./components'],
+      dirs: [
+        './components',
+        './layoutComponents',
+        './pagesComponents',
+      ],
     }),
   ],
 })

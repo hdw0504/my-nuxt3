@@ -1,5 +1,3 @@
-// import UnpluginComponentsVite from 'unplugin-vue-components/vite'
-
 export default defineNuxtConfig({
   modules: [
     '@vueuse/nuxt',
@@ -7,6 +5,10 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@nuxtjs/color-mode',
   ],
+  alias: {
+    style: '/<rootDir>/assets/style',
+  },
+  // nuxt auto import components
   components: {
     dirs: [
       '~/components',
@@ -14,12 +16,12 @@ export default defineNuxtConfig({
       '~/pagesComponents',
     ],
   },
+  // global css
   css: [
     'assets/style/root.css',
   ],
-  alias: {
-    style: '/<rootDir>/assets/style',
-  },
+
+  // antfu/vitesse-nuxt3 default config
   experimental: {
     reactivityTransform: true,
   },
@@ -29,13 +31,4 @@ export default defineNuxtConfig({
   colorMode: {
     classSuffix: '',
   },
-
-  // vite plugins
-  // vite: {
-  //   plugins: [
-  //     UnpluginComponentsVite({
-  //       dts: true,
-  //     }),
-  //   ],
-  // },
 })
