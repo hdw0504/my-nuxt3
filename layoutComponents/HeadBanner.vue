@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useMessage } from 'naive-ui'
-
+const { $isDark } = useNuxtApp()
 const message = useMessage()
 const { y } = useWindowScroll()
 
@@ -24,13 +24,18 @@ function handleSelect(key: string | number) {
   >
     <div mx-auto w-full max-w-7xl grid h-full grid-cols-12 lg:gap-8 transition-400>
       <div flex items-center justify-center flex-none col-span-2>
-        <n-dropdown trigger="click" :options="options" @select="handleSelect">
-          <div i-carbon-menu relative lg:hidden cursor-pointer />
+        <n-dropdown trigger="click" :show-arrow="true" :options="options" @select="handleSelect">
+          <!-- in production mode can't use without n-button tag to wake up dropdown -->
+          <!-- <div i-carbon-menu relative lg:hidden cursor-pointer /> -->
+          <n-button text tag="span" :color="$isDark ? '#fff' : '#000'" relative lg:hidden cursor-pointer>
+            <template #icon>
+              <n-icon>
+                <svg width="32" height="32" viewBox="0 0 32 32"><path fill="currentColor" d="M4 6h24v2H4zm0 18h24v2H4zm0-12h24v2H4zm0 6h24v2H4z" /></svg>
+              </n-icon>
+            </template>
+          </n-button>
         </n-dropdown>
 
-        <!-- <button relative z-10 u-text-gray-500 hover:u-text-gray-700 rounded-xl lg:hidden>
-          btn
-        </button> -->
         <Logo hidden lg:flex>
           this is logo
         </Logo>
