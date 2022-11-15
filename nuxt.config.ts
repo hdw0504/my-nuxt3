@@ -1,3 +1,5 @@
+import dayjs from 'dayjs'
+
 export default defineNuxtConfig({
   modules: [
     '@vueuse/nuxt',
@@ -30,5 +32,10 @@ export default defineNuxtConfig({
   },
   colorMode: {
     classSuffix: '',
+  },
+  vite: {
+    define: {
+      __BUILD_TIME__: JSON.stringify(dayjs().format('YYYY/MM/DD HH:mm')),
+    },
   },
 })
