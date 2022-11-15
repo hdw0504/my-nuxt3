@@ -1,6 +1,10 @@
 <script setup>
+import { darkTheme } from 'naive-ui'
+const color = useColorMode()
+const theme = computed(() => color.preference === 'dark' ? darkTheme : null)
+
 useHead({
-  title: 'Vitesse Nuxt 3',
+  title: 'nuxt3',
   link: [
     {
       rel: 'icon', type: 'image/png', href: '/nuxt.png',
@@ -10,9 +14,11 @@ useHead({
 </script>
 
 <template>
-  <NuxtLayout>
-    <NuxtPage />
-  </NuxtLayout>
+  <n-config-provider :theme="theme">
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+  </n-config-provider>
 </template>
 
 <style>
