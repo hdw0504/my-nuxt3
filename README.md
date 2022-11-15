@@ -2,6 +2,9 @@
 项目基于[vitesse-nuxt3](https://github.com/antfu/vitesse-nuxt3)
 `package.json`、`nuxt.config.ts`、`vitest.config.ts`、`tsconfig.json`配置放在结尾
 
+### 技术栈
+目前使用到 nuxt3、pinia、unocss、vueuse、naive-ui、vitest
+
 ### 项目版本
 ```txt
 nuxt版本：3.0.0-rc.13-27772354.a0a59e2
@@ -15,21 +18,29 @@ nuxt版本：3.0.0-rc.13-27772354.a0a59e2
 [在nuxt3中使用vitest和vueuse](https://github.com/vitest-dev/vitest/discussions/1737)
 [vitest配置](https://github.com/Qiskit/saiba/blob/main/vitest.config.ts)
 [在vitest中配置autoimport](https://github.com/remiconnesson/vitest-nuxt)
+[naiveUI服务端渲染SSR](https://www.naiveui.com/zh-CN/light/docs/ssr)
+[naiveUI nuxt support](https://github.com/tusen-ai/naive-ui/issues/636)
 
 ### 解决的问题
-- 全局css 
-  - `nuxt.config.ts`文档中css配置
-- `Vitest was initialized with native Node instead of Vite Node.` 错误
-  - 在vitest 中配置 `@nuxt/test-utils-edge`
-  - 在`vitest.config.ts`中配置`test.deps.inline`（参考底下配置） [nuxt issue](https://github.com/nuxt/framework/issues/3252#issuecomment-1126771193)
-- `No context is available. (Forgot calling setup or createContext?)` 错误
-  - nuxt2中是用setuptest 在nuxt3是使用setup [demo test](https://github.com/hdw0504/my-nuxt3/blob/main/tests/browser.test.ts)
-- test.ts 文件中自动引入 `vue3` `vueuse` `vitest`
-  - 参考 `vitest.config.ts` 和 `tsconfig.json`
-- 配置 vitest 路径和自动引入的组件与 nuxt 一致
-  - 参考 `vitest.config.ts`
+1. 全局css 
+   - 参考 `nuxt.config.ts` css 配置
+2. test.ts 文件中自动引入 `vue3` `vueuse` `vitest`
+   - 参考 `vitest.config.ts` 和 `tsconfig.json`
+3. 配置 vitest 路径和自动引入的组件与 nuxt 一致
+   - 参考 `vitest.config.ts`
+4. 配置 `naive-ui` 自动引入及主题配置
 
 
+### 学习中遇到的问题
+1. `No context is available. (Forgot calling setup or createContext?)` 错误
+   - nuxt2中是用setuptest 在nuxt3是使用setup [demo test](https://github.com/hdw0504/my-nuxt3/blob/main/tests/browser.test.ts)
+2. `Vitest was initialized with native Node instead of Vite Node.` 错误
+   - 在vitest 中配置 `@nuxt/test-utils-edge`
+   - 在`vitest.config.ts`中配置`test.deps.inline`（参考底下配置） [nuxt issue](https://github.com/nuxt/framework/issues/3252#issuecomment-1126771193)
+3. `Component inside <Transition> renders non-element root node that cannot be animated.` 错误
+   - 在nuxt中每个页面 `<template> </temnplate>` 都需要一个根节点（不同于 vue3 不限制）[nuxt issue](https://github.com/nuxt/framework/issues/5551#issuecomment-1162049709)
+
+---
 
 ``` json
 // package.json
@@ -48,6 +59,7 @@ nuxt版本：3.0.0-rc.13-27772354.a0a59e2
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.29.4",
+    "@css-render/vue3-ssr": "^0.15.11",
     "@iconify-json/carbon": "^1.1.9",
     "@iconify-json/twemoji": "^1.1.5",
     "@nuxt/test-utils-edge": "3.0.0-rc.13-27772354.a0a59e2",
@@ -55,8 +67,10 @@ nuxt版本：3.0.0-rc.13-27772354.a0a59e2
     "@pinia/nuxt": "^0.4.3",
     "@unocss/nuxt": "^0.46.4",
     "@vueuse/nuxt": "^9.5.0",
+    "dayjs": "^1.11.6",
     "eslint": "^8.27.0",
     "jsdom": "^20.0.2",
+    "naive-ui": "^2.33.5",
     "nuxt": "npm:nuxt3@3.0.0-rc.13-27772354.a0a59e2",
     "pinia": "^2.0.23",
     "playwright": "^1.27.1",
@@ -76,10 +90,15 @@ nuxt版本：3.0.0-rc.13-27772354.a0a59e2
     }
   }
 }
+
 ```
 
 ```ts
 // nuxt.config.ts
+import dayjs from 'dayjs'
+import Components from 'unplugin-vue-components/vite'
+import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
+
 export default defineNuxtConfig({
   modules: [
     '@vueuse/nuxt',
@@ -113,7 +132,36 @@ export default defineNuxtConfig({
   colorMode: {
     classSuffix: '',
   },
+  // naive-ui
+  build: {
+    transpile:
+      process.env.NODE_ENV === 'production'
+        ? ['naive-ui', 'vueuc', '@css-render/vue3-ssr', '@juggle/resize-observer']
+        : ['@juggle/resize-observer'],
+  },
+  vite: {
+  // need add declare from xxx.d.ts
+    define: {
+      __BUILD_TIME__: JSON.stringify(dayjs().format('YYYY/MM/DD HH:mm')),
+    },
+    ssr: {
+      noExternal: ['naive-ui'],
+    },
+    plugins: [
+      Components({
+        resolvers: [NaiveUiResolver()], // 全自动按需引入naive-ui组件
+      }),
+    ],
+    // 解决在开发模式下降低 naive-ui 引起的打包缓慢
+    optimizeDeps: {
+      include:
+        process.env.NODE_ENV === 'development'
+          ? ['naive-ui', 'vueuc', 'date-fns-tz/esm/formatInTimeZone']
+          : [],
+    },
+  },
 })
+
 ```
 ```ts
 // vitest.config.ts
@@ -162,7 +210,7 @@ export default defineConfig({
   "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
     "strict": true,
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals", "naive-ui/volar"]
   }
 }
 
