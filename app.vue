@@ -14,11 +14,11 @@ useHead({
 </script>
 
 <template>
-  <n-config-provider :theme="theme">
-    <NuxtLayout>
+  <NuxtLayout>
+    <n-config-provider :theme="theme">
       <NuxtPage />
-    </NuxtLayout>
-  </n-config-provider>
+    </n-config-provider>
+  </NuxtLayout>
 </template>
 
 <style>
