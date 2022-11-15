@@ -41,6 +41,8 @@ nuxt版本：3.0.0-rc.13-27772354.a0a59e2
    - 在nuxt中每个页面 `<template> </temnplate>` 都需要一个根节点（不同于 vue3 不限制）[nuxt issue](https://github.com/nuxt/framework/issues/5551#issuecomment-1162049709)
 4. `Adding tailwind reset hide button style of unocss` 
    - naiveUI 的按钮样式被 style 中的`tainwind.css` 样式所影响，需要在`nuxt.config.ts`中`unocss.preflight`设置为`false`[unocss issue](https://github.com/unocss/unocss/issues/1788#issuecomment-1287186630)
+5. nuxt dev模式下 `n-dropdown` 能用任何标签触发（div，span之类的）。但是打包后发现不生效。
+   - 使用`n-button`替代其余标签
 
 ---
 
