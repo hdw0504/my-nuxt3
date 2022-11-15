@@ -1,4 +1,4 @@
-记录日期2022.11.11
+记录日期2022.11.15
 项目基于[vitesse-nuxt3](https://github.com/antfu/vitesse-nuxt3)
 `package.json`、`nuxt.config.ts`、`vitest.config.ts`、`tsconfig.json`配置放在结尾
 
