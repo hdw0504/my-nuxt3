@@ -30,7 +30,8 @@ export default defineNuxtConfig({
     reactivityTransform: true,
   },
   unocss: {
-    preflight: true,
+    // Injecting `@unocss/reset/tailwind.css` entry
+    preflight: false,
   },
   colorMode: {
     classSuffix: '',

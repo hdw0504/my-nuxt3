@@ -39,6 +39,8 @@ nuxt版本：3.0.0-rc.13-27772354.a0a59e2
    - 在`vitest.config.ts`中配置`test.deps.inline`（参考底下配置） [nuxt issue](https://github.com/nuxt/framework/issues/3252#issuecomment-1126771193)
 3. `Component inside <Transition> renders non-element root node that cannot be animated.` 错误
    - 在nuxt中每个页面 `<template> </temnplate>` 都需要一个根节点（不同于 vue3 不限制）[nuxt issue](https://github.com/nuxt/framework/issues/5551#issuecomment-1162049709)
+4. `Adding tailwind reset hide button style of unocss` 
+   - naiveUI 的按钮样式被 style 中的`tainwind.css` 样式所影响，需要在`nuxt.config.ts`中`unocss.preflight`设置为`false`[unocss issue](https://github.com/unocss/unocss/issues/1788#issuecomment-1287186630)
 
 ---
 
@@ -127,7 +129,8 @@ export default defineNuxtConfig({
     reactivityTransform: true,
   },
   unocss: {
-    preflight: true,
+    // Injecting `@unocss/reset/tailwind.css` entry
+    preflight: false,
   },
   colorMode: {
     classSuffix: '',
