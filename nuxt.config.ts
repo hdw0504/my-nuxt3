@@ -22,7 +22,7 @@ export default defineNuxtConfig({
   },
   // global css
   css: [
-    'assets/style/root.css',
+    'assets/style/root.scss',
   ],
 
   // antfu/vitesse-nuxt3 default config

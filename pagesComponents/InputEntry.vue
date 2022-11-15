@@ -10,6 +10,12 @@ const go = () => {
 
 <template>
   <div>
+    <n-card title="卡片">
+      <n-button>Default</n-button>
+      <n-button tertiary>
+        Default
+      </n-button>
+    </n-card>
     <input
       id="input"
       v-model="name"
