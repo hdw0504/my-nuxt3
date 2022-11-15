@@ -4,4 +4,10 @@
   --header-height: 64px;
   --footer-height: 50px;
   --screens-lg: 1024px;
+
+  --bg-color:#ffffff;
+  &.dark{
+    --bg-color:#121212;
+    --text-color:white;
+  }
 }

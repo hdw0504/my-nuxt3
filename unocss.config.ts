@@ -16,6 +16,7 @@ export default defineConfig({
     'color-base': 'text-gray-900 dark:text-gray-300',
     'color-fade': 'text-gray-900:50 dark:text-gray-300:50',
     'icon-button': 'op50 hover:op100 my-auto',
+    'img-resize': 'resize max-w-full h-auto',
   },
   presets: [
     presetUno(),
