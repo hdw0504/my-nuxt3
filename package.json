@@ -6,6 +6,7 @@
     "dev": "nuxi dev",
     "preview": "nuxi preview",
     "start": "nr build && nr preview",
+    "analyze": "nr build && nuxi analyze",
     "lint": "eslint .",
     "test": "vitest",
     "postinstall": "nuxi prepare",

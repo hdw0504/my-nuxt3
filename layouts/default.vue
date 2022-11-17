@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div font-mono>
     <n-message-provider>
       <n-notification-provider>
         <n-loading-bar-provider>

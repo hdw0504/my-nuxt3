@@ -42,6 +42,7 @@ const svgs = [
             <div w-full lg:flex-1 lg:px-8 px-4 flex flex-col justify-center gap-2em lg:gap-4em>
               <h1 m0>
                 My Nuxt3 Practice
+                <span text-4xl animation class="wave">👋🏻</span>
               </h1>
               <h2 m0>
                 use with
@@ -60,3 +61,40 @@ const svgs = [
     </Suspense>
   </div>
 </template>
+
+<style scoped>
+.wave {
+  animation-name: wave-animation;
+  animation-duration: 2.5s;
+  animation-iteration-count: infinite;
+  transform-origin: 70% 70%;
+  display: inline-block;
+}
+
+@keyframes wave-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(14deg);
+  }
+  20% {
+    transform: rotate(-8deg);
+  }
+  30% {
+    transform: rotate(14deg);
+  }
+  40% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  60% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+</style>
