@@ -14,7 +14,8 @@ useHead({
 </script>
 
 <template>
-  <n-config-provider :theme="isDark ? darkTheme : lightTheme">
+  <!-- inline-theme-disabled 把行内css in js 去掉 -->
+  <n-config-provider :theme="isDark ? darkTheme : lightTheme" inline-theme-disabled>
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
