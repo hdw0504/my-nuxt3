@@ -66,29 +66,27 @@ nuxt版本：3.0.0-rc.13-27772354.a0a59e2
     "@css-render/vue3-ssr": "^0.15.11",
     "@iconify-json/carbon": "^1.1.9",
     "@iconify-json/twemoji": "^1.1.5",
-    "@nuxt/test-utils-edge": "3.0.0-rc.13-27772354.a0a59e2",
+    "@nuxt/test-utils-edge": "3.0.1-rc.0-27821553.ab125bd",
     "@nuxtjs/color-mode": "^3.1.8",
     "@pinia/nuxt": "^0.4.3",
     "@unocss/nuxt": "^0.46.4",
     "@vueuse/nuxt": "^9.5.0",
-    "dayjs": "^1.11.6",
     "eslint": "^8.27.0",
     "jsdom": "^20.0.2",
     "naive-ui": "^2.33.5",
-    "nuxt": "npm:nuxt3@3.0.0-rc.13-27772354.a0a59e2",
+    "nuxt": "^3.0.0",
     "pinia": "^2.0.23",
-    "playwright": "^1.27.1",
     "sass": "^1.56.1",
     "typescript": "^4.8.4",
     "unplugin-auto-import": "^0.11.4",
     "unplugin-vue-components": "^0.22.9",
     "vite": "^3.2.3",
-    "vitest": "^0.25.1",
-    "vue": "^3.2.44"
+    "vitest": "^0.25.1"
   },
   "pnpm": {
     "peerDependencyRules": {
       "ignoreMissing": [
+        "vue",
         "webpack"
       ]
     }

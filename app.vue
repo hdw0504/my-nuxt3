@@ -1,6 +1,7 @@
-<script setup>
+<script lang="ts" setup>
 import { darkTheme, lightTheme } from 'naive-ui'
-const { $isDark } = useNuxtApp()
+const color = useColorMode()
+const isDark = computed(() => color.value === 'dark')
 
 useHead({
   title: 'nuxt3',
@@ -13,11 +14,11 @@ useHead({
 </script>
 
 <template>
-  <NuxtLayout>
-    <n-config-provider :theme="$isDark ? darkTheme : lightTheme">
+  <n-config-provider :theme="isDark ? darkTheme : lightTheme">
+    <NuxtLayout>
       <NuxtPage />
-    </n-config-provider>
-  </NuxtLayout>
+    </NuxtLayout>
+  </n-config-provider>
 </template>
 
 <style>

@@ -51,7 +51,7 @@ const svgs = [
                 </a>
               </h2>
             </div>
-            <div w-full lg:max-w-46% lg:px-8 px-4>
+            <div w-full px-4 lg="max-w-46% px-8">
               <img img-resize class="shadow-2xl rd-4" width="536px" height="354px" src="https://picsum.photos/536/354" alt="">
             </div>
           </div>

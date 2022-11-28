@@ -29,6 +29,9 @@ export default defineNuxtConfig({
   experimental: {
     reactivityTransform: true,
   },
+  vueuse: {
+    ssrHandlers: true,
+  },
   unocss: {
     // Injecting `@unocss/reset/tailwind.css` entry
     preflight: false,
