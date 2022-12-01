@@ -1,6 +1,10 @@
 import dayjs from 'dayjs'
+import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
-import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import IconsResolver from 'unplugin-icons/resolver'
+import Icons from 'unplugin-icons/vite'
+import { FileSystemIconLoader } from 'unplugin-icons/loaders'
 
 export default defineNuxtConfig({
   modules: [
@@ -8,63 +12,101 @@ export default defineNuxtConfig({
     '@unocss/nuxt',
     '@pinia/nuxt',
     '@nuxtjs/color-mode',
-  ],
-  alias: {
-    style: '/<rootDir>/assets/style',
-  },
-  // nuxt auto import components
-  components: {
-    dirs: [
-      '~/components',
-      '~/layoutComponents',
-      '~/pagesComponents',
-    ],
-  },
-  // global css
-  css: [
-    'assets/style/root.scss',
+    'unplugin-icons/nuxt',
   ],
 
-  // antfu/vitesse-nuxt3 default config
+  imports: {
+    // Auto-import pinia stores defined in `~/stores`
+    dirs: ['stores'],
+  },
+
+  components: {
+    dirs: [
+      {
+        path: '~/components',
+        global: true,
+      },
+      '~/components/layout',
+    ],
+  },
+
+  css: [
+    '@unocss/reset/tailwind.css',
+    'element-plus/theme-chalk/src/index.scss', // full import (autoimport has some error)
+    'element-plus/theme-chalk/src/dark/css-vars.scss', // dark mode
+    '~/assets/style/index.scss', // global css
+  ],
+
+  // https://color-mode.nuxtjs.org/#configuration
+  colorMode: {
+    classSuffix: '', // theme mode suffix name
+  },
+
+  unocss: {
+    preflight: false,
+  },
+
   experimental: {
     reactivityTransform: true,
   },
+
+  // vueuse
   vueuse: {
     ssrHandlers: true,
   },
-  unocss: {
-    // Injecting `@unocss/reset/tailwind.css` entry
-    preflight: false,
-  },
-  colorMode: {
-    classSuffix: '',
-  },
-  // naive-ui
+
+  // build
   build: {
-    transpile:
-      process.env.NODE_ENV === 'production'
-        ? ['naive-ui', 'vueuc', '@css-render/vue3-ssr', '@juggle/resize-observer']
-        : ['@juggle/resize-observer'],
+    transpile: process.env.NODE_ENV === 'production' ? ['element-plus/es'] : [],
   },
+
   vite: {
-  // need add declare from xxx.d.ts
+    // need add declare from xxx.d.ts
     define: {
       __BUILD_TIME__: JSON.stringify(dayjs().format('YYYY/MM/DD HH:mm')),
     },
-    ssr: {
-      noExternal: ['naive-ui'],
+    css: {
+      preprocessorOptions: {
+        scss: {
+          // 主题定制方案 (not as *)
+          additionalData: '@use "@/assets/style/element/index.scss";',
+        },
+      },
     },
     plugins: [
+      AutoImport({
+        resolvers: [
+          // autoimport Feedback component like message and notification
+          ElementPlusResolver({
+            // ssr: true,
+            // importStyle: 'sass',
+            importStyle: false,
+          }),
+        ],
+      }),
       Components({
-        resolvers: [NaiveUiResolver()], // 全自动按需引入naive-ui组件
+        dts: true,
+        resolvers: [
+          // autoimport component and css
+          ElementPlusResolver({
+            // if turn ssr true will full Import when build project
+            // ssr: true,
+            // importStyle: 'sass',
+            importStyle: false,
+          }),
+          IconsResolver({
+            // prefix: 'i', // defalt prefix
+            customCollections: ['icons'],
+          }),
+        ],
+      }),
+      // https://github.com/antfu/unplugin-icons
+      Icons({
+        autoInstall: true,
+        customCollections: {
+          icons: FileSystemIconLoader('./assets/icons'),
+        },
       }),
     ],
-    // 解决在开发模式下降低 naive-ui 引起的打包缓慢
-    optimizeDeps: {
-      include:
-        process.env.NODE_ENV === 'development'
-          ? ['naive-ui', 'vueuc', 'date-fns-tz/esm/formatInTimeZone']
-          : [],
-    },
   },
 })
