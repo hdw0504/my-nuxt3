@@ -1,0 +1,28 @@
+@use './root.scss' as *;
+
+html,
+body,
+#__nuxt {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  transition-property: background-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 400ms;
+}
+
+html {
+  font-size: 16px;
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+::-webkit-scrollbar {
+  --at-apply: w-6px;
+  &-thumb{
+    --at-apply: bg-[#0003] dark:bg-[#fff3] rd-10px transition-200;
+  }
+  &-track{
+    --at-apply: rd-10px;
+  }
+}

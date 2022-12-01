@@ -1,13 +1,14 @@
-:root{
-  --page-height: calc(100vh - 114px);
-  --page-max-width: 90rem;
-  --header-height: 64px;
-  --footer-height: 50px;
-  --screens-lg: 1024px;
+:root {
+    --page-height: calc(100vh - 114px);
+    --page-max-width: 90rem;
+    --header-height: 64px;
+    --footer-height: 50px;
+    --screens-lg: 1024px;
 
-  --bg-color:#ffffff;
-  &.dark{
-    --bg-color:#121212;
-    --text-color:white;
-  }
+    --bg-color: #ffffff;
+
+    &.dark {
+        --bg-color: #121212;
+        --text-color: white;
+    }
 }
