@@ -2,9 +2,9 @@
 import { ID_INJECTION_KEY } from 'element-plus'
 
 useHead({
-  title: 'nuxt3',
+  title: 'HDW🎨',
   link: [
-    { rel: 'icon', type: 'image/png', href: '/nuxt.png' },
+    { rel: 'icon', type: 'image/png', href: 'image/nuxt.png' },
   ],
   meta: [
     { charset: 'utf-8' },

@@ -35,7 +35,7 @@ const { isLoading } = useImage({ src })
         <el-skeleton-item v-bind="$attrs" absolute top-0 left-0 w-full h-full box-border variant="image" />
       </template>
       <template #default>
-        <img v-bind="$attrs" :src="src">
+        <img v-bind="$attrs" :width="width" :height="height" :src="src">
       </template>
     </el-skeleton>
   </div>
