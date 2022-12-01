@@ -1,220 +1,57 @@
-记录日期2022.11.15
-项目基于[vitesse-nuxt3](https://github.com/antfu/vitesse-nuxt3)
-`package.json`、`nuxt.config.ts`、`vitest.config.ts`、`tsconfig.json`配置放在结尾
+# nuxt3 + element plus 模板
 
-### 技术栈
-目前使用到 nuxt3、pinia、unocss、vueuse、naive-ui、vitest
+### 在线预览/仓库地址
+link: https://element-plus-nuxt3.netlify.app <br>
+github: https://github.com/hdw0504/el-plus-nuxt3
 
-### 项目版本
-```txt
-nuxt版本：3.0.0-rc.13-27772354.a0a59e2
-@nuxt/test-utils-edge版本：3.0.0-rc.13-27772354.a0a59e2
+### 其余模板
+Vue 3.2 + Element-Plus 管理系统\
+link: https://v3-admin.netlify.app <br>
+github: https://github.com/hdw0504/v3-admin\
+
+### 项目前身今世
+基于 [vitesse-nuxt3](https://github.com/antfu/vitesse-nuxt3)\
+参考 [element-plus-nuxt-starter](https://github.com/element-plus/element-plus-nuxt-starter)\
+由于 `element-plus-nuxt-starter` 并未更新到nuxt3，并且在升级过程中遇到不少问题。\
+于是尝试个人搭建个模板方便后续使用。\
+包管理使用 `pnpm`，使用 `nr up` 更新依赖（nr 是一个包管理工具名为 [ni](https://github.com/antfu/ni) 的指令）
+### 项目技术栈
+- **Nuxt 3.0**
+  - Nuxt3正式版
+- **Element-Plus**
+  - 自动引入组件，支持暗黑模式，支持主题定制，目前只能全局引入样式（按需加载有bug等官方修复）
+- **Pinia**
+  - 使用 `setup store` 抛弃厚重的 ~~vuex~~ 写法 (拜拜了 `mutation`)
+- **vueuse**
+  - 自动引入vueuse
+- **unocss**
+  - 整个项目的样式全用 unocss 编写，简洁代码
+- **pnpm**
+  - 项目的包管理工具
+
+### 项目截图
+<img src="./public/image/home.jpg" />
+<img src="./public/image/build-size.jpg" />
+
+### TODO:
+- 等问题修复完毕后改为按需加载样式
+
+
+### 发布
+
+```bash
+npm run build
 ```
 
-### 学习记录
-[nuxt3 文档](https://v3.nuxtjs.org/)
-[nuxt2 unit test](https://test-utils.nuxtjs.org/)
-[vitest 文档](https://cn.vitest.dev/)
-[在nuxt3中使用vitest和vueuse](https://github.com/vitest-dev/vitest/discussions/1737)
-[vitest配置](https://github.com/Qiskit/saiba/blob/main/vitest.config.ts)
-[在vitest中配置autoimport](https://github.com/remiconnesson/vitest-nuxt)
-[naiveUI服务端渲染SSR](https://www.naiveui.com/zh-CN/light/docs/ssr)
-[naiveUI nuxt support](https://github.com/tusen-ai/naive-ui/issues/636)
+### 发布预览
 
-### 解决的问题
-1. 全局css 
-   - 参考 `nuxt.config.ts` css 配置
-2. test.ts 文件中自动引入 `vue3` `vueuse` `vitest`
-   - 参考 `vitest.config.ts` 和 `tsconfig.json`
-3. 配置 vitest 路径和自动引入的组件与 nuxt 一致
-   - 参考 `vitest.config.ts`
-4. 配置 `naive-ui` 自动引入及主题配置
-
-
-### 学习中遇到的问题
-1. `No context is available. (Forgot calling setup or createContext?)` 错误
-   - nuxt2中是用setuptest 在nuxt3是使用setup [demo test](https://github.com/hdw0504/my-nuxt3/blob/main/tests/browser.test.ts)
-2. `Vitest was initialized with native Node instead of Vite Node.` 错误
-   - 在vitest 中配置 `@nuxt/test-utils-edge`
-   - 在`vitest.config.ts`中配置`test.deps.inline`（参考底下配置） [nuxt issue](https://github.com/nuxt/framework/issues/3252#issuecomment-1126771193)
-3. `Component inside <Transition> renders non-element root node that cannot be animated.` 错误
-   - 在nuxt中每个页面 `<template> </temnplate>` 都需要一个根节点（不同于 vue3 不限制）[nuxt issue](https://github.com/nuxt/framework/issues/5551#issuecomment-1162049709)
-4. `Adding tailwind reset hide button style of unocss` 
-   - naiveUI 的按钮样式被 style 中的`tainwind.css` 样式所影响，需要在`nuxt.config.ts`中`unocss.preflight`设置为`false`[unocss issue](https://github.com/unocss/unocss/issues/1788#issuecomment-1287186630)
-5. nuxt dev模式下 `n-dropdown` 能用任何标签触发（div，span之类的）。但是打包后发现不生效。
-   - 使用`n-button`替代其余标签
-
----
-
-``` json
-// package.json
-{
-  "private": true,
-  "packageManager": "pnpm@7.9.0",
-  "scripts": {
-    "build": "nuxi build",
-    "dev": "nuxi dev",
-    "start": "node .output/server/index.mjs",
-    "lint": "eslint .",
-    "test": "vitest",
-    "postinstall": "nuxi prepare",
-    "generate": "nuxi generate",
-    "up": "taze major -I"
-  },
-  "devDependencies": {
-    "@antfu/eslint-config": "^0.29.4",
-    "@css-render/vue3-ssr": "^0.15.11",
-    "@iconify-json/carbon": "^1.1.9",
-    "@iconify-json/twemoji": "^1.1.5",
-    "@nuxt/test-utils-edge": "3.0.1-rc.0-27821553.ab125bd",
-    "@nuxtjs/color-mode": "^3.1.8",
-    "@pinia/nuxt": "^0.4.3",
-    "@unocss/nuxt": "^0.46.4",
-    "@vueuse/nuxt": "^9.5.0",
-    "eslint": "^8.27.0",
-    "jsdom": "^20.0.2",
-    "naive-ui": "^2.33.5",
-    "nuxt": "^3.0.0",
-    "pinia": "^2.0.23",
-    "sass": "^1.56.1",
-    "typescript": "^4.8.4",
-    "unplugin-auto-import": "^0.11.4",
-    "unplugin-vue-components": "^0.22.9",
-    "vite": "^3.2.3",
-    "vitest": "^0.25.1"
-  },
-  "pnpm": {
-    "peerDependencyRules": {
-      "ignoreMissing": [
-        "vue",
-        "webpack"
-      ]
-    }
-  }
-}
-
+```bash
+npm run preview
 ```
 
-```ts
-// nuxt.config.ts
-import dayjs from 'dayjs'
-import Components from 'unplugin-vue-components/vite'
-import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
+### 打包分析
 
-export default defineNuxtConfig({
-  modules: [
-    '@vueuse/nuxt',
-    '@unocss/nuxt',
-    '@pinia/nuxt',
-    '@nuxtjs/color-mode',
-  ],
-  alias: {
-    style: '/<rootDir>/assets/style',
-  },
-  // nuxt auto import components
-  components: {
-    dirs: [
-      '~/components',
-      '~/layoutComponents',
-      '~/pagesComponents',
-    ],
-  },
-  // global css
-  css: [
-    'assets/style/root.css',
-  ],
-
-  // antfu/vitesse-nuxt3 default config
-  experimental: {
-    reactivityTransform: true,
-  },
-  unocss: {
-    // Injecting `@unocss/reset/tailwind.css` entry
-    preflight: false,
-  },
-  colorMode: {
-    classSuffix: '',
-  },
-  // naive-ui
-  build: {
-    transpile:
-      process.env.NODE_ENV === 'production'
-        ? ['naive-ui', 'vueuc', '@css-render/vue3-ssr', '@juggle/resize-observer']
-        : ['@juggle/resize-observer'],
-  },
-  vite: {
-  // need add declare from xxx.d.ts
-    define: {
-      __BUILD_TIME__: JSON.stringify(dayjs().format('YYYY/MM/DD HH:mm')),
-    },
-    ssr: {
-      noExternal: ['naive-ui'],
-    },
-    plugins: [
-      Components({
-        resolvers: [NaiveUiResolver()], // 全自动按需引入naive-ui组件
-      }),
-    ],
-    // 解决在开发模式下降低 naive-ui 引起的打包缓慢
-    optimizeDeps: {
-      include:
-        process.env.NODE_ENV === 'development'
-          ? ['naive-ui', 'vueuc', 'date-fns-tz/esm/formatInTimeZone']
-          : [],
-    },
-  },
-})
-
-```
-```ts
-// vitest.config.ts
-import { resolve } from 'path'
-import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-import { defineConfig } from 'vitest/config'
-
-export default defineConfig({
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    // fix bug: Vitest was initialized with native Node instead of Vite Node
-    // https://github.com/nuxt/framework/issues/3252#issuecomment-1126771193
-    deps: {
-      inline: ['@nuxt/test-utils-edge'],
-    },
-  },
-  resolve: {
-    alias: {
-      '@': resolve(__dirname, '.'),
-    },
-  },
-  plugins: [
-    // auto import vue、vueuse
-    AutoImport({
-      imports: ['vue', '@vueuse/core'],
-      vueTemplate: true,
-      dts: true, // not matter
-    }),
-    // auto import vue component
-    Components({
-      dirs: [
-        './components',
-        './layoutComponents',
-        './pagesComponents',
-      ],
-    }),
-  ],
-})
+```bash
+npm run analyze
 ```
 
-```json
-// tsconfig.json
-{
-  "extends": "./.nuxt/tsconfig.json",
-  "compilerOptions": {
-    "strict": true,
-    "types": ["vitest/globals", "naive-ui/volar"]
-  }
-}
-
-```
