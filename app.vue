@@ -1,43 +1,34 @@
 <script lang="ts" setup>
-import { darkTheme, lightTheme } from 'naive-ui'
-const color = useColorMode()
-const isDark = computed(() => color.value === 'dark')
+import { ID_INJECTION_KEY } from 'element-plus'
 
 useHead({
   title: 'nuxt3',
   link: [
-    {
-      rel: 'icon', type: 'image/png', href: '/nuxt.png',
-    },
+    { rel: 'icon', type: 'image/png', href: '/nuxt.png' },
   ],
+  meta: [
+    { charset: 'utf-8' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+  ],
+  htmlAttrs: {
+    lang: 'zh',
+  },
+})
+
+provide(ID_INJECTION_KEY, {
+  prefix: 1024,
+  current: 0,
 })
 </script>
 
 <template>
-  <!-- inline-theme-disabled 把行内css in js 去掉 -->
-  <n-config-provider :theme="isDark ? darkTheme : lightTheme" inline-theme-disabled>
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
-  </n-config-provider>
+  <div>
+    <!-- https://nuxt.com/docs/api/components/client-only#clientonly -->
+    <client-only>
+      <NuxtLayout>
+        <NuxtLoadingIndicator :height="5" :duration="3000" :throttle="400" />
+        <NuxtPage />
+      </NuxtLayout>
+    </client-only>
+  </div>
 </template>
-
-<style>
-html, body , #__nuxt{
-  height: 100vh;
-  margin: 0;
-  padding: 0;
-  transition-property: background-color;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 400ms;
-}
-
-html {
-  font-size: 16px;
-}
-
-html.dark {
-  background: var(--bg-color);
-  color: var(--text-color);
-}
-</style>

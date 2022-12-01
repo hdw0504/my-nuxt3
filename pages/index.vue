@@ -1,68 +1,122 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 const svgs = [
   {
-    width: '24px',
-    height: '24px',
-    src: 'https://cn.vitest.dev/logo.svg',
-    href: 'https://cn.vitest.dev/',
-  },
-  {
-    width: '24px',
-    height: '24px',
-    src: 'https://d33wubrfki0l68.cloudfront.net/2f6479d73bc25170dc532dd42e059166573bf478/61057/favicon.svg',
+    width: '24',
+    height: '24',
+    name: 'vueuse',
+    src: 'https://vueuse.org/favicon.svg',
     href: 'https://vueuse.org/',
   },
   {
-    width: '24px',
-    height: '24px',
-    src: 'https://www.naiveui.com/assets/naivelogo.93278402.svg',
-    href: 'https://www.naiveui.com/zh-CN/dark',
+    width: '24',
+    height: '24',
+    name: 'element-plus',
+    src: 'https://element-plus.org/images/element-plus-logo-small.svg',
+    href: 'https://element-plus.org/',
   },
   {
-    width: '24px',
-    height: '30px',
+    width: '24',
+    height: '24',
+    name: 'unocss',
+    src: 'https://uno.antfu.me/favicon.svg',
+    href: 'https://uno.antfu.me/',
+  },
+  {
+    width: '24',
+    height: '30',
+    name: 'pinia',
     src: 'https://pinia.vuejs.org/logo.svg',
     href: 'https://pinia.vuejs.org/zh/index.html',
   },
+]
 
+const colorMode = useColorMode()
+const isDark = computed(() => colorMode.value === 'dark')
+
+const projects = [
+  {
+    name: 'v3-admin',
+    repo: 'https://github.com/hdw0504/v3-admin',
+    website: 'https://v3-admin.netlify.app/',
+    desc: 'An admin template with Vue 3.2 + TypeScript + Pinia + Vite3 + Element-Plus + vueuse + unocss + vitest',
+    img: '/image/v3-admin-light.jpg',
+    darkImg: '/image/v3-admin-dark.jpg',
+  },
+  {
+    name: 'el-plus-nuxt3',
+    repo: 'https://github.com/hdw0504/el-plus-nuxt3',
+    website: 'https://element-plus-nuxt3.netlify.app/',
+    desc: 'A template with nuxt3 + element-plus',
+    img: '/image/ep-nuxt-light.jpg',
+    darkImg: '/image/ep-nuxt-dark.jpg',
+  },
 ]
 </script>
 
 <template>
   <div>
-    <Suspense>
-      <template #fallback>
-        <div op50 italic>
-          <span animate-pulse>Loading...</span>
+    <div flex flex-wrap gap-8>
+      <div w-full flex flex-col justify-center gap-2em lg="flex-1 gap-4em">
+        <p text-8 font-bold>
+          My Nuxt3 Practice
+          <span text-4xl animation class="wave">👋🏻</span>
+        </p>
+        <p class="logo" text-4>
+          use with
+          <i-icons-nuxt />
+          <i-icons-element-plus />
+          <i-icons-unocss />
+          <i-icons-pinia />
+          <i-icons-vite />
+        </p>
+      </div>
+      <div w-full lg="flex-1">
+        <div m-x-auto max-w-536px>
+          <lazy-image img-resize shadow-2xl rd-4 width="536" height="354" src="https://picsum.photos/536/354" alt="" />
         </div>
-      </template>
-      <template #default>
-        <div>
-          <div mx-auto w-full flex flex-wrap gap-2em>
-            <div w-full lg:flex-1 lg:px-8 px-4 flex flex-col justify-center gap-2em lg:gap-4em>
-              <h1 m0>
-                My Nuxt3 Practice
-                <span text-4xl animation class="wave">👋🏻</span>
-              </h1>
-              <h2 m0>
-                use with
-                <a v-for="(svg, i) in svgs" :key="i" :href="svg.href" target="_blank">
-                  <img v-bind="svg">
-                </a>
-              </h2>
-            </div>
-            <div w-full px-4 lg="max-w-46% px-8">
-              <img img-resize class="shadow-2xl rd-4" width="536px" height="354px" src="https://picsum.photos/536/354" alt="">
+      </div>
+    </div>
+
+    <div flex flex-wrap gap-8 m-t-30>
+      <el-card v-for="project in projects" :key="project.name" w-full lg="flex-1 max-w-2xl">
+        <template #header>
+          <div flex justify-between>
+            <p>{{ project.name }}</p>
+            <div>
+              <el-link mr-4 :underline="false" :href="project.repo" target="_blank">
+                <i-ep-folder text-4 mr-2 />
+                repositorie
+              </el-link>
+              <el-link :underline="false" :href="project.website" target="_blank">
+                <i-ep-monitor text-4 mr-2 />
+                website
+              </el-link>
             </div>
           </div>
-          <!-- <InputEntry /> -->
+        </template>
+        <div flex flex-row gap-2>
+          <div flex-1 min-w="40%" text-left>
+            <p m-b-2 font-bold>
+              About
+            </p>
+            <p>{{ project.desc }}</p>
+          </div>
+          <el-image
+            max-w-500px
+            :src="isDark ? project.darkImg : project.img"
+            :preview-src-list="[project.darkImg, project.img]"
+            :initial-index="isDark ? 0 : 1"
+          />
         </div>
-      </template>
-    </Suspense>
+      </el-card>
+    </div>
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+.logo svg{
+  --at-apply: inline text-8 m-r-2 cursor-pointer transition-all-400 hover:scale-130;
+}
 .wave {
   animation-name: wave-animation;
   animation-duration: 2.5s;
