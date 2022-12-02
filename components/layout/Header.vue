@@ -17,7 +17,7 @@ function handleSelect(key: string | number) {
     sticky top-0 z-10
     w-full
     b-gray-200 dark:b-gray-700 transition-all-400
-    bg="[var(--bg-color)]" :class="y === 0 ? 'b-none h-30' : 'b-b h-[var(--header-height)]'"
+    :class="[$attrs.class, y === 0 ? 'b-none h-30' : 'b-b h-[var(--header-height)]']"
   >
     <div mx-auto w-full max-w-7xl grid h-full grid-cols-12 lg:gap-8>
       <div flex items-center justify-center flex-none col-span-2>
@@ -49,6 +49,8 @@ function handleSelect(key: string | number) {
   </header>
 </template>
 
-<style scoped>
-
+<style lang="scss" scoped>
+header{
+    backdrop-filter: saturate(50%) blur(.3em);
+}
 </style>
