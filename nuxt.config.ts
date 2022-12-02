@@ -46,6 +46,16 @@ export default defineNuxtConfig({
     preflight: false,
   },
 
+  app: {
+    /**
+     * If you are changing layouts as well as page,
+     * the page transition you set here will not run.
+     * Instead, you should set a layout transition.
+     */
+    pageTransition: { name: 'page', mode: 'out-in' },
+    keepalive: true,
+  },
+
   experimental: {
     reactivityTransform: true,
   },

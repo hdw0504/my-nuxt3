@@ -22,13 +22,27 @@ provide(ID_INJECTION_KEY, {
 </script>
 
 <template>
+  <NuxtLoadingIndicator :height="5" :duration="3000" :throttle="400" />
+
   <div>
     <!-- https://nuxt.com/docs/api/components/client-only#clientonly -->
     <client-only>
       <NuxtLayout>
-        <NuxtLoadingIndicator :height="5" :duration="3000" :throttle="400" />
         <NuxtPage />
       </NuxtLayout>
     </client-only>
   </div>
 </template>
+
+<style>
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.4s;
+}
+
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
+}
+</style>
