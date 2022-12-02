@@ -1,37 +1,5 @@
 <script lang="ts" setup>
-const svgs = [
-  {
-    width: '24',
-    height: '24',
-    name: 'vueuse',
-    src: 'https://vueuse.org/favicon.svg',
-    href: 'https://vueuse.org/',
-  },
-  {
-    width: '24',
-    height: '24',
-    name: 'element-plus',
-    src: 'https://element-plus.org/images/element-plus-logo-small.svg',
-    href: 'https://element-plus.org/',
-  },
-  {
-    width: '24',
-    height: '24',
-    name: 'unocss',
-    src: 'https://uno.antfu.me/favicon.svg',
-    href: 'https://uno.antfu.me/',
-  },
-  {
-    width: '24',
-    height: '30',
-    name: 'pinia',
-    src: 'https://pinia.vuejs.org/logo.svg',
-    href: 'https://pinia.vuejs.org/zh/index.html',
-  },
-]
-
-const colorMode = useColorMode()
-const isDark = computed(() => colorMode.value === 'dark')
+const router = useRouter()
 
 const projects = [
   {
@@ -63,7 +31,7 @@ const projects = [
         </p>
         <p class="logo" text-4>
           use with
-          <span display="block md:inline" m-t="2 md:none">
+          <span display="block md:inline-block" lg="children:animate-none!" m-t="2 md:none" @click="router.push({ path: '/feature' })">
             <i-icons-nuxt />
             <i-icons-element-plus />
             <i-icons-unocss />
@@ -74,7 +42,11 @@ const projects = [
       </div>
       <div w-full lg="flex-1">
         <div m-x-auto max-w-536px>
-          <lazy-image img-resize shadow-2xl rd-4 width="536" height="354" src="https://picsum.photos/536/354" alt="" />
+          <lazy-image
+            img-resize shadow-2xl rd-4
+            width="536" height="354"
+            src="https://picsum.photos/536/354" alt="picsum photo"
+          />
         </div>
       </div>
     </div>
@@ -104,10 +76,8 @@ const projects = [
             <p>{{ project.desc }}</p>
           </div>
           <el-image
-            max-w-500px
-            :src="isDark ? project.darkImg : project.img"
-            :preview-src-list="[project.darkImg, project.img]"
-            :initial-index="isDark ? 0 : 1"
+            max-w-500px :src="isDark ? project.darkImg : project.img"
+            :preview-src-list="[project.darkImg, project.img]" :initial-index="isDark ? 0 : 1"
             :hide-on-click-modal="true"
           />
         </div>
@@ -117,11 +87,20 @@ const projects = [
 </template>
 
 <style lang="scss" scoped>
-.logo svg{
+.logo svg {
   --at-apply: inline text-8 m-r-2 cursor-pointer transition-all-400 hover:scale-130;
+  animation-name: scale-animation;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+
+  @for $i from 1 through 4 {
+    &:nth-child(#{$i + 1}) {
+      animation-delay: $i * 1s;
+    }
+  }
 }
 
-.el-image{
+.el-image {
   --at-apply: transition-all-400 hover:shadow-lg;
 }
 
@@ -137,26 +116,47 @@ const projects = [
   0% {
     transform: rotate(0deg);
   }
+
   10% {
     transform: rotate(14deg);
   }
+
   20% {
     transform: rotate(-8deg);
   }
+
   30% {
     transform: rotate(14deg);
   }
+
   40% {
     transform: rotate(-4deg);
   }
+
   50% {
     transform: rotate(10deg);
   }
+
   60% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(0deg);
+  }
+}
+
+@keyframes scale-animation {
+  0% {
+    transform: scale(1);
+  }
+
+  10% {
+    transform: scale(1.3);
+  }
+
+  20% {
+    transform: scale(1);
   }
 }
 </style>
