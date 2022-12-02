@@ -1,5 +1,21 @@
 <script lang="ts" setup>
+import IconElPlus from '~icons/icons/element-plus'
+import IconVueuse from '~icons/icons/vueuse'
+import IconUnocss from '~icons/icons/unocss'
+import IconPinia from '~icons/icons/pinia'
+import IconVite from '~icons/icons/vite'
+
 const router = useRouter()
+const colorMode = useColorMode()
+const isDark = computed(() => colorMode.value === 'dark')
+
+const icons = [
+  { name: 'Element Plus', icon: IconElPlus },
+  { name: 'Vueuse', icon: IconVueuse },
+  { name: 'Unocss', icon: IconUnocss },
+  { name: 'Pinia', icon: IconPinia },
+  { name: 'Vite', icon: IconVite },
+]
 
 const projects = [
   {
@@ -31,12 +47,8 @@ const projects = [
         </p>
         <p class="logo" text-4>
           use with
-          <span display="block md:inline-block" lg="children:animate-none!" m-t="2 md:none" @click="router.push({ path: '/feature' })">
-            <i-icons-nuxt />
-            <i-icons-element-plus />
-            <i-icons-unocss />
-            <i-icons-pinia />
-            <i-icons-vite />
+          <span display="block md:inline-block" lg="children:animate-none!" m-t="2 md:none">
+            <component :is="item.icon" v-for="item in icons" :key="item.name" @click="router.push({ path: '/feature', query: { name: item.name } })" />
           </span>
         </p>
       </div>
