@@ -30,7 +30,7 @@ const { isLoading } = useImage({ src })
 
 <template>
   <div w-full>
-    <el-skeleton :loading="isLoading" :class="{ relative: isLoading }" :style="{}" variant="image" :rows="1" animated>
+    <el-skeleton :loading="isLoading" relative :style="{}" variant="image" :rows="1" animated>
       <template #template>
         <el-skeleton-item v-bind="$attrs" absolute top-0 left-0 w-full h-full box-border variant="image" />
       </template>
