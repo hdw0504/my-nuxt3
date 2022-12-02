@@ -63,11 +63,13 @@ const projects = [
         </p>
         <p class="logo" text-4>
           use with
-          <i-icons-nuxt />
-          <i-icons-element-plus />
-          <i-icons-unocss />
-          <i-icons-pinia />
-          <i-icons-vite />
+          <span display="block md:inline" m-t="2 md:none">
+            <i-icons-nuxt />
+            <i-icons-element-plus />
+            <i-icons-unocss />
+            <i-icons-pinia />
+            <i-icons-vite />
+          </span>
         </p>
       </div>
       <div w-full lg="flex-1">
@@ -76,7 +78,7 @@ const projects = [
         </div>
       </div>
     </div>
-
+    <!-- project -->
     <div flex flex-wrap gap-8 m-t-30>
       <el-card v-for="project in projects" :key="project.name" w-full lg="flex-1 max-w-2xl">
         <template #header>
@@ -85,16 +87,16 @@ const projects = [
             <div>
               <el-link mr-4 :underline="false" :href="project.repo" target="_blank">
                 <i-ep-folder text-4 mr-2 />
-                repositorie
+                <span display="none md:inline">repositorie</span>
               </el-link>
               <el-link :underline="false" :href="project.website" target="_blank">
                 <i-ep-monitor text-4 mr-2 />
-                website
+                <span display="none md:inline">website</span>
               </el-link>
             </div>
           </div>
         </template>
-        <div flex flex-row gap-2>
+        <div flex="~ col md:row" gap-2>
           <div flex-1 min-w="40%" text-left>
             <p m-b-2 font-bold>
               About
@@ -106,6 +108,7 @@ const projects = [
             :src="isDark ? project.darkImg : project.img"
             :preview-src-list="[project.darkImg, project.img]"
             :initial-index="isDark ? 0 : 1"
+            :hide-on-click-modal="true"
           />
         </div>
       </el-card>
@@ -117,6 +120,11 @@ const projects = [
 .logo svg{
   --at-apply: inline text-8 m-r-2 cursor-pointer transition-all-400 hover:scale-130;
 }
+
+.el-image{
+  --at-apply: transition-all-400 hover:shadow-lg;
+}
+
 .wave {
   animation-name: wave-animation;
   animation-duration: 2.5s;
