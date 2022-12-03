@@ -74,33 +74,30 @@ function openWebsite(url: string) {
   window.open(url, '_blank')
 }
 
-const boxEl = ref<HTMLElement | null>(null)
 const titleRefs = reactive<Record<string, HTMLElement>>({})
-
 function setItemRef(name: string) {
   return (el: any) => {
     titleRefs[name] = el
   }
 }
 
+const { y } = useScroll(window, { behavior: 'smooth' })
 onMounted(() => {
   const titleName = route.query.name as string
   if (!titleName)
     return
   // scroll to title
   setTimeout(() => {
-    window.scrollTo({
-      // h-30 ==> 7.5rem ==> 120px
-      top: titleRefs[titleName].offsetTop - 120 - 30,
-      behavior: 'smooth',
-    })
-    // animate need 400ms
+    // h-30 ==> 7.5rem ==> 120px
+    // gap-12 ==> 3em ==> 48px
+    y.value = titleRefs[titleName].offsetTop - 120 - 48 / 2
+    // router page animate need 400ms
   }, 800)
 })
 </script>
 
 <template>
-  <div ref="boxEl" flex="~ col" gap-12>
+  <div flex="~ col" gap-12>
     <span text-3rem mb-12>🔥 Features</span>
     <div v-for="(item, inx) in features" :key="item.name" flex="~ col lg:row" gap-12 :class="{ 'lg:flex-row-reverse': inx % 2 }">
       <div flex-1>
