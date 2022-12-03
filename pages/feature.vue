@@ -108,7 +108,8 @@ onMounted(() => {
       </div>
       <div w-full lg="flex-1">
         <div m-x-auto max-w-536px>
-          <img img-resize shadow-2xl cursor-pointer width="536" height="536" :src="isDark ? item.darkImg : item.img" alt="website shortcut" @click="openWebsite(item.href)">
+          <img img-resize shadow-2xl cursor-pointer block dark:hidden width="536" height="536" loading="lazy" :src="item.img" alt="website shortcut" @click="openWebsite(item.href)">
+          <img img-resize shadow-2xl cursor-pointer hidden dark:block width="536" height="536" loading="lazy" :src="item.darkImg" alt="website shortcut" @click="openWebsite(item.href)">
         </div>
       </div>
     </div>

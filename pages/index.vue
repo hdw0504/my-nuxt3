@@ -81,17 +81,28 @@ const projects = [
           </div>
         </template>
         <div flex="~ col md:row" gap-2>
-          <div flex-1 min-w="40%" text-left>
+          <div flex-1 md="max-w-40%" text-left>
             <p m-b-2 font-bold>
               About
             </p>
             <p>{{ project.desc }}</p>
           </div>
-          <el-image
-            max-w-500px :src="isDark ? project.darkImg : project.img"
-            :preview-src-list="[project.darkImg, project.img]" :initial-index="isDark ? 0 : 1"
-            :hide-on-click-modal="true"
-          />
+          <div flex-1 md="max-w-500px">
+            <img
+              img-resize
+              block dark:hidden
+              transition-all-400 hover:shadow-lg
+              width="927" height="927" loading="lazy"
+              :src="project.img" alt="website shortcut"
+            >
+            <img
+              img-resize
+              dark:block hidden
+              transition-all-400 hover:shadow-lg
+              width="927" height="927" loading="lazy"
+              :src="project.darkImg" alt="website shortcut"
+            >
+          </div>
         </div>
       </el-card>
     </div>
