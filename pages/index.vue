@@ -5,9 +5,18 @@ import IconUnocss from '~icons/icons/unocss'
 import IconPinia from '~icons/icons/pinia'
 import IconVite from '~icons/icons/vite'
 
+// test api
+// const { data, pending, error, refresh } = await useLazyFetch('/api/test/tom?gender=male', {
+//   method: 'post',
+//   body: {
+//     age: 12,
+//   },
+// })
+
+// const { data } = await useLazyFetch('/api/sentence')
+// console.log({ data })
+
 const router = useRouter()
-const colorMode = useColorMode()
-const isDark = computed(() => colorMode.value === 'dark')
 
 const icons = [
   { name: 'Element Plus', icon: IconElPlus },
