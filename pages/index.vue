@@ -135,6 +135,10 @@ const projects = [
 .el-image {
   --at-apply: transition-all-400 hover:shadow-lg;
 }
+.logo span::after{
+  content: '...';
+  --at-apply: vertical-bottom color-fade;
+}
 
 .wave {
   animation-name: wave-animation;

@@ -1,14 +1,16 @@
 <script setup lang="ts">
+const router = useRouter()
 const { y } = useWindowScroll()
 
 const options = [
   {
-    label: '测试',
-    key: 'test',
+    label: 'feature',
+    url: '/feature',
   },
 ]
-function handleSelect(key: string | number) {
+function handleSelect(key: string) {
   // ElMessage.info(String(key))
+  router.push({ path: '/feature' })
 }
 </script>
 
@@ -27,7 +29,7 @@ function handleSelect(key: string | number) {
           </span>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item v-for="item in options" :key="item.key">
+              <el-dropdown-item v-for="item in options" :key="item.label" @click="handleSelect(item.url)">
                 {{ item.label }}
               </el-dropdown-item>
             </el-dropdown-menu>
