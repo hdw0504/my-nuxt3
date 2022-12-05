@@ -13,8 +13,6 @@ definePageMeta({
 })
 
 const router = useRouter()
-const colorMode = useColorMode()
-const isDark = computed(() => colorMode.value === 'dark')
 
 const route = useRoute()
 
