@@ -1,4 +1,4 @@
-export function deepClonne<T>(obj: T): T {
+export function deepClone<T>(obj: T): T {
   const copiedObjects = new WeakMap<object, any>()
   const copy = (obj: T): T => {
     const result: any = {}
