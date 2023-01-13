@@ -1,3 +1,7 @@
+/**
+ * 深拷贝
+ * @param {any} 拷贝的数据
+ */
 export function deepClone<T>(obj: T): T {
   const copiedObjects = new WeakMap<object, any>()
   const copy = (obj: T): T => {
@@ -25,3 +29,19 @@ export function deepClone<T>(obj: T): T {
   return copy(obj)
 }
 
+/**
+ * TS Omit 方法
+ *
+ * 过滤掉所选的key值
+ * @param {object} 对象
+ * @param {string[]} 待过滤的数据
+ */
+export function omit<T extends Record<string, any>, K extends keyof T>(
+  obj: T,
+  keys: K[],
+): Omit<T, K> {
+  return Object.entries(obj).reduce((prev, [k, v]) => {
+    !keys.includes(k as K) && (prev[k as K] = v)
+    return prev
+  }, {} as T)
+}

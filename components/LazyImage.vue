@@ -8,8 +8,8 @@ export default {
 <script setup lang="ts">
 interface Props {
   src: string
-  width: string | number
-  height: string | number
+  width: number
+  height: number
   mode?: 'fill' | 'contain' // contain 自适应等比缩放
 }
 // 因为基础样式有宽度和高度限制，需要加 important 去提高优先级
