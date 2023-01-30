@@ -7,10 +7,12 @@ import { FileSystemIconLoader } from 'unplugin-icons/loaders'
 export default defineNuxtConfig({
   modules: [
     '@vueuse/nuxt',
-    '@unocss/nuxt',
     '@pinia/nuxt',
+    '@unocss/nuxt',
+    '@element-plus/nuxt',
     '@nuxtjs/color-mode',
     '@element-plus/nuxt',
+    '@nuxtjs/i18n',
     'unplugin-icons/nuxt',
   ],
 
@@ -41,7 +43,15 @@ export default defineNuxtConfig({
 
   // https://color-mode.nuxtjs.org/#configuration
   colorMode: {
-    classSuffix: '', // theme mode suffix name
+    // default options
+    preference: 'system', // default value of $colorMode.preference
+    fallback: 'light', // fallback value if not system preference found
+    // hid: 'nuxt-color-mode-script',
+    // globalName: '__NUXT_COLOR_MODE__',
+    // componentName: 'ColorScheme',
+    // classPrefix: '',
+    classSuffix: '',
+    // storageKey: 'nuxt-color-mode'
   },
 
   unocss: {
