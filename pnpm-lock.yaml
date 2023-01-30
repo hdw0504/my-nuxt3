@@ -2,8 +2,10 @@ lockfileVersion: 5.4
 
 specifiers:
   '@antfu/eslint-config': ^0.31.0
+  '@element-plus/nuxt': ^1.0.2
   '@iconify-json/carbon': ^1.1.11
   '@iconify-json/ep': ^1.1.8
+  '@iconify-json/mdi': ^1.1.44
   '@iconify-json/twemoji': ^1.1.6
   '@nuxtjs/color-mode': ^3.2.0
   '@pinia/nuxt': ^0.4.6
@@ -23,8 +25,10 @@ specifiers:
 
 devDependencies:
   '@antfu/eslint-config': 0.31.0_hsf322ms6xhhd4b5ne6lb74y4a
+  '@element-plus/nuxt': 1.0.2_element-plus@2.2.25
   '@iconify-json/carbon': 1.1.11
   '@iconify-json/ep': 1.1.8
+  '@iconify-json/mdi': 1.1.44
   '@iconify-json/twemoji': 1.1.6
   '@nuxtjs/color-mode': 3.2.0
   '@pinia/nuxt': 0.4.6_typescript@4.9.3
@@ -469,6 +473,21 @@ packages:
         optional: true
     dev: true
 
+  /@element-plus/nuxt/1.0.2_element-plus@2.2.25:
+    resolution: {integrity: sha512-ztEtmBvsgdbOatQyFgCxZnYh/cVHolyRWRNJgddP72Nek5IgwZYkwA48Chpz5druE5XKGrkzYIByvcCX4NAsGw==}
+    peerDependencies:
+      '@element-plus/icons-vue': '>=0.2.6'
+      element-plus: '>=2'
+    dependencies:
+      '@nuxt/kit': 3.0.0
+      element-plus: 2.2.25
+      magic-string: 0.27.0
+      unplugin: 1.0.1
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
+    dev: true
+
   /@esbuild/android-arm/0.15.16:
     resolution: {integrity: sha512-nyB6CH++2mSgx3GbnrJsZSxzne5K0HMyNIWafDHqYy7IwxFc4fd/CgHVZXr8Eh+Q3KbIAcAe3vGyqIPhGblvMQ==}
     engines: {node: '>=12'}
@@ -542,6 +561,12 @@ packages:
 
   /@iconify-json/ep/1.1.8:
     resolution: {integrity: sha512-pHCrsWU1R9/pTDU+Fps4+mjqOQFLtpGdXWegkhQ1P1DlgQAlCPyICtl6E1s8b7VwJMeZXaK84HA02UF6WD0o/Q==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify-json/mdi/1.1.44:
+    resolution: {integrity: sha512-Apg9JY3jzWUTNiDWVBo7pD0WUAxdgoDhqr+X5TF1X6kVmM6U4Uo+Fo9dFaf4Qfwfsbt23zp2BHiaV1h1Hqm31g==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true
@@ -4382,6 +4407,13 @@ packages:
       sourcemap-codec: 1.4.8
     dev: true
 
+  /magic-string/0.27.0:
+    resolution: {integrity: sha512-8UnnX2PeRAPZuN12svgR9j7M1uWMovg/CEnIwIG0LFkXSJJe4PdfUGiTGl8V9bsBHFUtfVINcSyYxd7q+kx9fA==}
+    engines: {node: '>=12'}
+    dependencies:
+      '@jridgewell/sourcemap-codec': 1.4.14
+    dev: true
+
   /make-dir/3.1.0:
     resolution: {integrity: sha512-g3FeP20LNwhALb/6Cz6Dd4F2ngze0jz7tbzrD2wAV+o9FeNHe4rL+yK2md0J/fiSf1sa1ADhXqi5+oVwOM/eGw==}
     engines: {node: '>=8'}
@@ -6495,6 +6527,15 @@ packages:
       webpack-virtual-modules: 0.4.6
     dev: true
 
+  /unplugin/1.0.1:
+    resolution: {integrity: sha512-aqrHaVBWW1JVKBHmGo33T5TxeL0qWzfvjWokObHA9bYmN7eNDkwOxmLjhioHl9878qDFMAaT51XNroRyuz7WxA==}
+    dependencies:
+      acorn: 8.8.1
+      chokidar: 3.5.3
+      webpack-sources: 3.2.3
+      webpack-virtual-modules: 0.5.0
+    dev: true
+
   /unstorage/1.0.1:
     resolution: {integrity: sha512-J1c4b8K2KeihHrQtdgl/ybIapArUbPaPb+TyJy/nGSauDwDYqciZsEKdkee568P3c8SSH4TIgnGRHDWMPGw+Lg==}
     dependencies:
@@ -6775,6 +6816,10 @@ packages:
 
   /webpack-virtual-modules/0.4.6:
     resolution: {integrity: sha512-5tyDlKLqPfMqjT3Q9TAqf2YqjwmnUleZwzJi1A5qXnlBCdj2AtOJ6wAWdglTIDOPgOiOrXeBeFcsQ8+aGQ6QbA==}
+    dev: true
+
+  /webpack-virtual-modules/0.5.0:
+    resolution: {integrity: sha512-kyDivFZ7ZM0BVOUteVbDFhlRt7Ah/CSPwJdi8hBpkK7QLumUqdLtVfm/PX/hkcnrvr0i77fO5+TjZ94Pe+C9iw==}
     dev: true
 
   /whatwg-url/5.0.0:

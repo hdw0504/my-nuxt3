@@ -65,7 +65,7 @@ const projects = [
         <div m-x-auto max-w-536px>
           <lazy-image
             img-resize shadow-2xl rd-4
-            width="536" height="354"
+            :width="536" :height="354"
             src="https://picsum.photos/536/354" alt="picsum photo"
           />
         </div>

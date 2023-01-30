@@ -1,7 +1,5 @@
 import dayjs from 'dayjs'
-import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import IconsResolver from 'unplugin-icons/resolver'
 import Icons from 'unplugin-icons/vite'
 import { FileSystemIconLoader } from 'unplugin-icons/loaders'
@@ -12,6 +10,7 @@ export default defineNuxtConfig({
     '@unocss/nuxt',
     '@pinia/nuxt',
     '@nuxtjs/color-mode',
+    '@element-plus/nuxt',
     'unplugin-icons/nuxt',
   ],
 
@@ -32,10 +31,13 @@ export default defineNuxtConfig({
 
   css: [
     '@unocss/reset/tailwind.css',
-    'element-plus/theme-chalk/src/index.scss', // full import (autoimport has some error)
-    'element-plus/theme-chalk/src/dark/css-vars.scss', // dark mode
     '~/assets/style/index.scss', // global css
   ],
+
+  elementPlus: {
+    importStyle: 'scss',
+    themes: ['dark'],
+  },
 
   // https://color-mode.nuxtjs.org/#configuration
   colorMode: {
@@ -47,11 +49,6 @@ export default defineNuxtConfig({
   },
 
   app: {
-    /**
-     * If you are changing layouts as well as page,
-     * the page transition you set here will not run.
-     * Instead, you should set a layout transition.
-     */
     pageTransition: { name: 'page', mode: 'out-in' },
     keepalive: true,
   },
@@ -63,11 +60,6 @@ export default defineNuxtConfig({
   // vueuse
   vueuse: {
     ssrHandlers: true,
-  },
-
-  // build
-  build: {
-    transpile: process.env.NODE_ENV === 'production' ? ['element-plus/es'] : [],
   },
 
   vite: {
@@ -84,26 +76,9 @@ export default defineNuxtConfig({
       },
     },
     plugins: [
-      AutoImport({
-        resolvers: [
-          // autoimport Feedback component like message and notification
-          ElementPlusResolver({
-            // ssr: true,
-            // importStyle: 'sass',
-            importStyle: false,
-          }),
-        ],
-      }),
       Components({
         dts: true,
         resolvers: [
-          // autoimport component and css
-          ElementPlusResolver({
-            // if turn ssr true will full Import when build project
-            // ssr: true,
-            // importStyle: 'sass',
-            importStyle: false,
-          }),
           IconsResolver({
             // prefix: 'i', // defalt prefix
             customCollections: ['icons'],
