@@ -44,6 +44,7 @@ function handleSelect(key: string) {
         </nav> -->
       </div>
       <div flex items-center justify-center flex-none col-span-2 gap-2 lg:gap-4>
+        <div i-mdi-comment-edit-outline cursor-pointer @click="router.push({ path: '/tiptap' })" />
         <a i-carbon-logo-github text-current href="https://github.com/hdw0504/my-nuxt3" target="_blank" aria-label="github" />
         <DarkToggle />
       </div>
