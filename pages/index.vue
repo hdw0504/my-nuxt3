@@ -56,7 +56,7 @@ const projects = [
         </p>
         <p class="logo" text-4>
           use with
-          <span display="block md:inline-block" lg="children:animate-none!" m-t="2 md:none">
+          <span display="block md:inline-block" lg="children:animate-none!" m-t="2 md:none" svg="w-1.2em h-1.2em">
             <component :is="item.icon" v-for="item in icons" :key="item.name" @click="router.push({ path: '/feature', query: { name: item.name } })" />
           </span>
         </p>
@@ -76,7 +76,9 @@ const projects = [
       <el-card v-for="project in projects" :key="project.name" w-full lg="flex-1 max-w-2xl">
         <template #header>
           <div flex justify-between>
-            <p>{{ project.name }}</p>
+            <p lh-initial>
+              {{ project.name }}
+            </p>
             <div>
               <el-link mr-4 :underline="false" :href="project.repo" target="_blank">
                 <i-ep-folder text-4 mr-2 />
@@ -91,10 +93,12 @@ const projects = [
         </template>
         <div flex="~ col md:row" gap-2>
           <div flex-1 md="max-w-40%" text-left>
-            <p m-b-2 font-bold>
+            <p m-b-2 font-bold lh-initial>
               About
             </p>
-            <p>{{ project.desc }}</p>
+            <p lh-initial>
+              {{ project.desc }}
+            </p>
           </div>
           <div flex-1 md="max-w-500px">
             <img

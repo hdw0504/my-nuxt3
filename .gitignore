@@ -9,3 +9,5 @@ dist
 
 # Rollup Plugin Visualizer files
 stats.html
+
+public/emojis

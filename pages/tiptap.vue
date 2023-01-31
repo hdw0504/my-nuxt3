@@ -1,65 +1,34 @@
 <script setup lang="ts">
-import { EditorContent, useEditor } from '@tiptap/vue-3'
-import type { Picker } from 'emoji-mart'
-import StarterKit from '@tiptap/starter-kit'
-
-const emit = defineEmits<{
-  (e: 'select', code: string): void
-}>()
-
-const editor = useEditor({
-  content: '<p>I’m running Tiptap with Vue.js. 🎉</p>',
-  extensions: [
-    StarterKit,
-  ],
-})
-
-const el = $ref<HTMLElement>()
-let picker = $ref<Picker>()
-const colorMode = useColorMode()
-async function openEmojiPicker() {
-  if (picker) {
-    picker.update({
-      theme: colorMode.value,
-    })
-  }
-  else {
-    const promise = import('@emoji-mart/data/sets/14/twitter.json').then(r => r.default)
-    const { Picker } = await import('emoji-mart')
-    picker = new Picker({
-      searchPosition: 'none',
-      data: () => promise,
-      onEmojiSelect({ native, src, alt, name }: any) {
-        emit('select', native)
-      },
-      set: 'twitter',
-      theme: colorMode.value,
-    })
-  }
-  // TODO: custom picker
-  el?.appendChild(picker as any as HTMLElement)
-}
-
-function hideEmojiPicker() {
-  if (picker)
-    el?.removeChild(picker as any as HTMLElement)
+const editorText = ref('')
+function handleEditorText(text: string) {
+  editorText.value = text
 }
 </script>
 
 <template>
-  <div>
-    <EditorContent :editor="editor" />
-    <el-popover :width="376" trigger="click" @show="openEmojiPicker" @hide="hideEmojiPicker">
-      <template #reference>
-        <el-avatar src="https://avatars.githubusercontent.com/u/72015883?v=4" />
+  <div text-initial>
+    <div>
+      <div flex justify-center mb-12>
+        <span text-3rem mr-2 font-bold>Tiptap Editor</span>
+        <nuxt-link href="https://tiptap.dev/" target="_blank" i-ep-link />
+      </div>
+    </div>
+
+    <div flex flex-col justify-center items-center>
+      <tiptap-editor class="editor" editor-class="min-h-20vh max-h-30vh of-auto" @submit="handleEditorText" />
+
+      <template v-if="editorText">
+        <div w-1200px b rd-4 px-4 py-2 mt-4 lh-28px>
+          <div>output:</div>
+          <div v-html="editorText" />
+        </div>
       </template>
-      <template #default>
-        <div ref="el" />
-      </template>
-    </el-popover>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-
+.editor{
+  --at-apply: w-50vw b rd-4 px-4 py-2;
+}
 </style>

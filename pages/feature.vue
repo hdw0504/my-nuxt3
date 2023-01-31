@@ -99,7 +99,7 @@ onMounted(() => {
     <span text-3rem mb-12 font-bold>🔥 Features</span>
     <div v-for="(item, inx) in features" :key="item.name" flex="~ col lg:row" gap-12 :class="{ 'lg:flex-row-reverse': inx % 2 }">
       <div flex-1>
-        <div flex justify-center items-center gap-2 text-2xl font-bold>
+        <div flex justify-center items-center gap-2 text-2xl font-bold svg="w-1.2em h-1.2em">
           <component :is="item.icon" />
           <span :id="item.name" :ref="setItemRef(item.name)">{{ item.name }}</span>
         </div>

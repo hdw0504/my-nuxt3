@@ -32,7 +32,8 @@ export default defineNuxtConfig({
   },
 
   css: [
-    '@unocss/reset/tailwind.css',
+    // '@unocss/reset/tailwind.css',
+    '@unocss/reset/eric-meyer.css',
     '~/assets/style/index.scss', // global css
   ],
 

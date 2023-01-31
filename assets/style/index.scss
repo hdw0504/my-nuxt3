@@ -19,10 +19,142 @@ html {
 
 ::-webkit-scrollbar {
   --at-apply: w-6px;
-  &-thumb{
+
+  &-thumb {
     --at-apply: bg-[#0003] dark:bg-[#fff3] rd-10px transition-200;
   }
-  &-track{
+
+  &-track {
     --at-apply: rd-10px;
   }
+}
+
+
+// tiptap富文本
+.ProseMirror {
+  p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    pointer-events: none;
+    height: 0;
+    opacity: 0.4;
+  }
+
+  span[data-type='mention'],
+  span[data-type='hashtag'] {
+    --at-apply: text-primary;
+  }
+
+  &.content-rich {
+    overflow-wrap: break-word;
+
+    a {
+      --at-apply: 'text-primary hover:underline hover:text-primary-active';
+
+      .invisible {
+        --at-apply: 'hidden';
+      }
+
+      .ellipsis {
+        --at-apply: 'line-clamp-1 ws-pre-wrap break-all inline';
+
+        &::after {
+          content: '…';
+        }
+      }
+    }
+
+    b,
+    strong {
+      --at-apply: font-bold;
+    }
+
+    p {
+      --at-apply: my-2;
+    }
+
+    p:first-child {
+      --at-apply: mt-1;
+    }
+
+    p:last-child {
+      --at-apply: mb-1;
+    }
+
+    code {
+      --at-apply: bg-code text-code px1 py0.5 rounded text-0.875em leading-0.8em;
+    }
+
+    pre code {
+      --at-apply: bg-transparent px0 py0 rounded-none leading-1.6em;
+    }
+
+    ol {
+      --at-apply: list-decimal my-3 pl-6 ml-2;
+    }
+
+    ul {
+      --at-apply: list-disc my-3 pl-6 ml-2;
+    }
+
+    li {
+      --at-apply: mt-1 mb-1;
+
+      &:empty {
+        --at-apply: hidden;
+      }
+    }
+
+    ol>li {
+      --at-apply: pl-2;
+    }
+
+    ul>li {
+      --at-apply: pl-2;
+    }
+
+    .code-block {
+      --at-apply: bg-code text-0.875em p3 mt-2 rounded overflow-auto leading-1.6em;
+
+      .shiki {
+        background: transparent !important;
+      }
+    }
+  }
+
+  &.content-editor {
+    --at-apply: outline-none flex-1;
+    max-width: 100%;
+
+    .custom-emoji {
+      margin: 0 0.2em;
+    }
+
+    p {
+      --at-apply: my-0;
+      line-height: calc(4 / 3 * 1em);
+    }
+
+    p:first-child {
+      --at-apply: mt-1;
+    }
+
+    p:last-child {
+      --at-apply: mb-1;
+    }
+  }
+
+}
+
+.iconify-emoji {
+  display: inline-block;
+  overflow: hidden;
+  max-height: 1.2em;
+  max-width: 1.2em;
+  vertical-align: text-bottom;
+  margin: 0 0.1em;
+}
+
+.iconify-emoji-padded {
+  transform: scale(1.2);
 }
