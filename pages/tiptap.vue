@@ -3,6 +3,8 @@ const editorText = ref('')
 function handleEditorText(text: string) {
   editorText.value = text
 }
+
+const showHtml = ref(true)
 </script>
 
 <template>
@@ -19,8 +21,16 @@ function handleEditorText(text: string) {
 
       <template v-if="editorText">
         <div w-1200px b rd-4 px-4 py-2 mt-4 lh-28px>
-          <div>output:</div>
-          <div v-html="editorText" />
+          <div flex justify-between items-center>
+            output:
+            <el-button type="warning" @click="showHtml = !showHtml">
+              switch output
+            </el-button>
+          </div>
+          <div v-if="showHtml" v-html="editorText" />
+          <div v-else>
+            {{ editorText }}
+          </div>
         </div>
       </template>
     </div>
