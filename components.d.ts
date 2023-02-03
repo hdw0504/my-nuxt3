@@ -7,14 +7,6 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    ElButton: typeof import('element-plus/es')['ElButton']
-    ElCard: typeof import('element-plus/es')['ElCard']
-    ElDropdown: typeof import('element-plus/es')['ElDropdown']
-    ElDropdownItem: typeof import('element-plus/es')['ElDropdownItem']
-    ElDropdownMenu: typeof import('element-plus/es')['ElDropdownMenu']
-    ElLink: typeof import('element-plus/es')['ElLink']
-    ElSkeleton: typeof import('element-plus/es')['ElSkeleton']
-    ElSkeletonItem: typeof import('element-plus/es')['ElSkeletonItem']
     ICarbonTextAlignJustify: typeof import('~icons/carbon/text-align-justify')['default']
     IEpFolder: typeof import('~icons/ep/folder')['default']
     IEpMonitor: typeof import('~icons/ep/monitor')['default']

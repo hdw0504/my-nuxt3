@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@pinia/nuxt',
     '@unocss/nuxt',
+    '@vue-macros/nuxt',
     '@element-plus/nuxt',
     '@nuxtjs/color-mode',
     '@element-plus/nuxt',
@@ -66,11 +67,6 @@ export default defineNuxtConfig({
 
   experimental: {
     reactivityTransform: true,
-  },
-
-  // vueuse
-  vueuse: {
-    ssrHandlers: true,
   },
 
   vite: {

@@ -1,11 +1,6 @@
-<script lang="ts">
-// 使用普通的 <script> 来声明选项
-export default {
-  inheritAttrs: false,
-}
-</script>
-
 <script setup lang="ts">
+import { useImage } from '@vueuse/core'
+
 interface Props {
   src: string
   width: number
@@ -15,6 +10,10 @@ interface Props {
 // 因为基础样式有宽度和高度限制，需要加 important 去提高优先级
 const props = withDefaults(defineProps<Props>(), {
   mode: 'contain',
+})
+
+defineOptions({
+  inheritAttrs: false,
 })
 
 const {
@@ -30,9 +29,19 @@ const { isLoading } = useImage({ src })
 
 <template>
   <div w-full>
-    <el-skeleton :loading="isLoading" relative variant="image" :rows="1" animated>
+    <el-skeleton
+      :loading="isLoading" variant="image" :rows="1" animated :style="{
+        width: `${width}px`,
+        height: `${height}px`,
+      }"
+    >
       <template #template>
-        <el-skeleton-item v-bind="$attrs" absolute top-0 left-0 w-full h-full box-border variant="image" />
+        <el-skeleton-item
+          v-bind="$attrs" :style="{
+            width: `${width}px`,
+            height: `${height}px`,
+          }" variant="image"
+        />
       </template>
       <template #default>
         <img v-bind="$attrs" :width="width" :height="height" :src="src">
@@ -42,7 +51,7 @@ const { isLoading } = useImage({ src })
 </template>
 
 <style lang="scss" scoped>
-.el-skeleton{
-  padding-bottom: v-bind(heightPercent);
-}
+// .el-skeleton{
+//   padding-bottom: v-bind(heightPercent);
+// }
 </style>
