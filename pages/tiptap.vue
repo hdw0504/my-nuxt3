@@ -20,7 +20,7 @@ const showHtml = ref(true)
       <tiptap-editor class="editor" editor-class="min-h-20vh max-h-30vh of-auto" @submit="handleEditorText" />
 
       <template v-if="editorText">
-        <div w-1200px b rd-4 px-4 py-2 mt-4 lh-28px>
+        <div w-1200px b b-solid rd-4 px-4 py-2 mt-4 lh-28px>
           <div flex justify-between items-center>
             output:
             <el-button type="warning" @click="showHtml = !showHtml">
