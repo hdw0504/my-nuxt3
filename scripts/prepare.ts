@@ -8,6 +8,6 @@ const dereference = process.platform === 'win32' ? true : undefined
   await copy(
     `node_modules/${iconifyEmojiPackage}/icons`,
     `public/emojis/${emojiPrefix}`,
-    { overwrite: true, dereference }
+    { overwrite: true, dereference },
   )
 })()
