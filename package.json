@@ -2,7 +2,8 @@
   "private": true,
   "packageManager": "pnpm@7.14.0",
   "scripts": {
-    "build": "nuxt build && esno scripts/fixPopper.ts",
+    "build": "nuxt build && npm run fixPopper",
+    "fixPopper": "esno scripts/fixPopper.ts",
     "dev": "nuxt dev --port 3001",
     "start": "npm run build && npm run preview",
     "generate": "nuxt generate",
