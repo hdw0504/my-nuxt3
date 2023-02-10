@@ -7,8 +7,8 @@ const dereference = process.platform === 'win32' ? true : undefined
   // https://github.com/element-plus/element-plus/issues/10979
 
   await copy(
-    '.output/server/node_modules/@sxzz/popperjs-es',
-    '.output/server/node_modules/@popperjs/core',
+    '.netlify/functions-internal/server/node_modules/@sxzz/popperjs-es',
+    '.netlify/functions-internal/server/node_modules/@popperjs/core',
     { dereference },
   )
   console.log('finish cover @popperjs/core from @sxzz/popperjs-es ...')
@@ -16,7 +16,7 @@ const dereference = process.platform === 'win32' ? true : undefined
   // 因为那边需要index.js ...
   await copy(
     'node_modules/@popperjs/core/dist/index.js',
-    '.output/server/node_modules/@popperjs/core/dist/index.js',
+    '.netlify/functions-internal/server/node_modules/@popperjs/core/dist/index.js',
     { dereference },
   )
   console.log('finish cover index.js ...')
