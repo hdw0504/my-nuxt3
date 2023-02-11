@@ -15,8 +15,10 @@ import IconVite from '~icons/icons/vite'
 
 // const { data } = await useLazyFetch('/api/sentence')
 // console.log({ data })
+const { t } = useI18n()
 
 const router = useRouter()
+const localePath = useLocalePath()
 
 const icons = [
   { name: 'Element Plus', icon: IconElPlus },
@@ -31,7 +33,7 @@ const projects = [
     name: 'v3-admin',
     repo: 'https://github.com/hdw0504/v3-admin',
     website: 'https://v3-admin.netlify.app/',
-    desc: 'An admin template with Vue 3.2 + TypeScript + Pinia + Vite3 + Element-Plus + vueuse + unocss + vitest',
+    desc: t('project.desc.admin'),
     img: '/image/v3-admin-light.jpg',
     darkImg: '/image/v3-admin-dark.jpg',
   },
@@ -39,9 +41,17 @@ const projects = [
     name: 'el-plus-nuxt3',
     repo: 'https://github.com/hdw0504/el-plus-nuxt3',
     website: 'https://element-plus-nuxt3.netlify.app/',
-    desc: 'A template with nuxt3 + element-plus',
+    desc: t('project.desc.elNuxt'),
     img: '/image/ep-nuxt-light.jpg',
     darkImg: '/image/ep-nuxt-dark.jpg',
+  },
+  {
+    name: 'node.js cn document',
+    repo: '',
+    website: 'https://nodejs-cn.netlify.app//',
+    desc: t('project.desc.nodeDoc'),
+    img: '/image/node-light.png',
+    darkImg: '/image/node-dark.png',
   },
 ]
 </script>
@@ -51,20 +61,23 @@ const projects = [
     <div flex flex-wrap gap-8>
       <div w-full flex flex-col justify-center gap-2em lg="flex-1 gap-4em">
         <p text-8 font-bold>
-          My Nuxt3 Practice
+          {{ $t('homeTitle') }}
           <span text-4xl animation class="wave">👋🏻</span>
         </p>
         <p class="logo" text-4>
-          use with
+          {{ $t('use') }}
           <span display="block md:inline-block" lg="children:animate-none!" m-t="2 md:none" svg="w-1.2em h-1.2em">
-            <component :is="item.icon" v-for="item in icons" :key="item.name" @click="router.push({ path: '/feature', query: { name: item.name } })" />
+            <component
+              :is="item.icon" v-for="item in icons" :key="item.name"
+              @click="router.push(localePath({ name: 'feature', query: { name: item.name } }))"
+            />
           </span>
         </p>
       </div>
       <div w-full lg="flex-1">
         <div m-x-auto max-w-536px>
           <lazy-image
-            img-resize shadow-2xl rd-4
+            class="rd-4! img-resize shadow-2xl"
             :width="536" :height="354"
             src="https://picsum.photos/536/354" alt="picsum photo"
           />
@@ -80,13 +93,13 @@ const projects = [
               {{ project.name }}
             </p>
             <div>
-              <el-link mr-4 :underline="false" :href="project.repo" target="_blank">
+              <el-link v-if="project.repo" mr-4 :underline="false" :href="project.repo" target="_blank">
                 <i-ep-folder text-4 mr-2 />
-                <span display="none md:inline">repositorie</span>
+                <span display="none md:inline">{{ $t('repositorie') }}</span>
               </el-link>
               <el-link :underline="false" :href="project.website" target="_blank">
                 <i-ep-monitor text-4 mr-2 />
-                <span display="none md:inline">website</span>
+                <span display="none md:inline">{{ $t('website') }}</span>
               </el-link>
             </div>
           </div>
@@ -94,7 +107,7 @@ const projects = [
         <div flex="~ col md:row" gap-2>
           <div flex-1 md="max-w-40%" text-left>
             <p m-b-2 font-bold lh-initial>
-              About
+              {{ $t("project.about") }}
             </p>
             <p lh-initial>
               {{ project.desc }}

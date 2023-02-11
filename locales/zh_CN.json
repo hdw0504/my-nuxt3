@@ -1,0 +1,16 @@
+{
+  "homeTitle": "个人 Nuxt3 练习 ",
+  "use": "使用",
+  "repositorie": "仓库",
+  "website": "网址",
+  "buildBY": "创建者",
+  "lastUpdate": "更新时间",
+  "project": {
+    "about": "项目介绍",
+    "desc": {
+      "admin": "一个管理后台，使用 Vue 3.2 + TypeScript + Pinia + Vite3 + Element-Plus + vueuse + unocss + vitest",
+      "elNuxt": "使用 nuxt3 + element-plus 的模板",
+      "nodeDoc": "node18 中文文档"
+    }
+  }
+}

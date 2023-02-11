@@ -56,6 +56,21 @@ export default defineNuxtConfig({
     // storageKey: 'nuxt-color-mode'
   },
 
+  i18n: {
+    locales: [
+      { code: 'en', file: 'en_US.json', name: 'English' },
+      { code: 'tw', file: 'zh_TW.json', name: '繁體中文' },
+      { code: 'zh', file: 'zh_CN.json', name: '简体中文' },
+    ],
+    lazy: true,
+    langDir: 'locales',
+    defaultLocale: 'en',
+    vueI18n: {
+      legacy: false,
+      locale: 'en',
+    },
+  },
+
   unocss: {
     preflight: false,
   },

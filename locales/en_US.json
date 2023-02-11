@@ -1,0 +1,16 @@
+{
+  "homeTitle": "My Nuxt3 Practice",
+  "use": "use with",
+  "repositorie": "repositorie",
+  "website": "website",
+  "buildBY": "build by",
+  "lastUpdate": "last update",
+  "project": {
+    "about": "About",
+    "desc": {
+      "admin": "An admin template with Vue 3.2 + TypeScript + Pinia + Vite3 + Element-Plus + vueuse + unocss + vitest",
+      "elNuxt": "A template with nuxt3 + element-plus",
+      "nodeDoc": "A Chinese translation of the document from node.js 18"
+    }
+  }
+}
