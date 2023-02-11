@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { WritableComputedRef } from 'vue'
 import IconNuxt from '~icons/icons/nuxt'
 import IconVue from '~icons/icons/vuejs'
 import IconElPlus from '~icons/icons/element-plus'
@@ -79,7 +80,10 @@ function setItemRef(name: string) {
   }
 }
 
-const { y } = useScroll(window, { behavior: 'smooth' })
+const { y } = process.client
+  ? useScroll(window, { behavior: 'smooth' })
+  : { y: ref(0) as WritableComputedRef<number> }
+
 onMounted(() => {
   const titleName = route.query.name as string
   if (!titleName)
@@ -121,4 +125,3 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 </style>
-

@@ -19,39 +19,31 @@ defineOptions({
 const {
   src,
   mode,
-  width: propWidth,
-  height: propHeight,
+  width,
+  height,
 } = props
 
-const heightPercent = `${Number(propHeight) / Number(propWidth) * 100}%`
 const { isLoading } = useImage({ src })
+const propWidth = computed(() => `${props.width}px`)
+const propHeight = computed(() => `${props.height}px`)
 </script>
 
 <template>
   <div w-full>
-    <el-skeleton
-      :loading="isLoading" variant="image" :rows="1" animated :style="{
-        width: `${width}px`,
-        height: `${height}px`,
-      }"
-    >
+    <el-skeleton :loading="isLoading" variant="image" :rows="1" animated>
       <template #template>
-        <el-skeleton-item
-          v-bind="$attrs" :style="{
-            width: `${width}px`,
-            height: `${height}px`,
-          }" variant="image"
-        />
+        <el-skeleton-item :class="$attrs.class" variant="image" />
       </template>
       <template #default>
-        <img v-bind="$attrs" :width="width" :height="height" :src="src">
+        <img :class="$attrs.class" :width="width" :height="height" :src="src">
       </template>
     </el-skeleton>
   </div>
 </template>
 
 <style lang="scss" scoped>
-// .el-skeleton{
-//   padding-bottom: v-bind(heightPercent);
-// }
+.el-skeleton, .el-skeleton__item{
+  width: v-bind(propWidth);
+  height: v-bind(propHeight);
+}
 </style>
