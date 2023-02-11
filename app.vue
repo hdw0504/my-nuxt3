@@ -26,11 +26,9 @@ provide(ID_INJECTION_KEY, {
 
   <div>
     <!-- https://nuxt.com/docs/api/components/client-only#clientonly -->
-    <client-only>
-      <NuxtLayout>
-        <NuxtPage />
-      </NuxtLayout>
-    </client-only>
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
   </div>
 </template>
 
