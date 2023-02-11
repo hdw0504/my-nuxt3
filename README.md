@@ -1,13 +1,17 @@
-# nuxt3 + element plus 模板
+# 个人 nuxt3
 
 ### 在线预览/仓库地址
-link: https://element-plus-nuxt3.netlify.app <br>
-github: https://github.com/hdw0504/el-plus-nuxt3
+link: https://nuxt3-practice.netlify.app/ <br>
+github: https://github.com/hdw0504/my-nuxt3
 
 ### 其余模板
 Vue 3.2 + Element-Plus 管理系统\
 link: https://v3-admin.netlify.app <br>
-github: https://github.com/hdw0504/v3-admin\
+github: https://github.com/hdw0504/v3-admin
+
+nuxt3 + element plus 模板\
+link: https://element-plus-nuxt3.netlify.app
+github: https://github.com/hdw0504/el-plus-nuxt3
 
 ### 项目前身今世
 基于 [vitesse-nuxt3](https://github.com/antfu/vitesse-nuxt3)\
@@ -28,14 +32,6 @@ github: https://github.com/hdw0504/v3-admin\
   - 整个项目的样式全用 unocss 编写，简洁代码
 - **pnpm**
   - 项目的包管理工具
-
-### 项目截图
-<img src="./public/image/home.jpg" />
-<img src="./public/image/build-size.jpg" />
-
-### TODO:
-- 等问题修复完毕后改为按需加载样式
-
 
 ### 发布
 
