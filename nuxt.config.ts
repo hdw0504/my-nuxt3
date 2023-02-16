@@ -6,6 +6,7 @@ import { FileSystemIconLoader } from 'unplugin-icons/loaders'
 
 export default defineNuxtConfig({
   modules: [
+    '@nuxt/devtools',
     '@vueuse/nuxt',
     '@pinia/nuxt',
     '@unocss/nuxt',
