@@ -1,32 +1,29 @@
 <script setup lang="ts">
 interface Tab {
-  label: string
-  value: string | number
+  title: string
   slotKey: string
 }
 
-const props = defineProps<{
-  modelValue: Tab['value']
+defineProps<{
+  modelValue: Tab['slotKey']
   tabs: Tab[]
 }>()
 
 defineEmits<{
-  (e: 'update:modelValue', v: Tab['value']): void
+  (e: 'update:modelValue', v: Tab['slotKey']): void
 }>()
-
-const curSlotName = computed(() => props.tabs.find(tab => tab.value === props.modelValue)?.slotKey)
 </script>
 
 <template>
   <div>
     <div class="title">
-      <p v-for="tab in tabs" :key="tab.value" @click="$emit('update:modelValue', tab.value)">
-        {{ tab.label }}
+      <p v-for="tab in tabs" :key="tab.slotKey" @click="$emit('update:modelValue', tab.slotKey)">
+        {{ tab.title }}
       </p>
     </div>
 
     <div class="content">
-      <slot :name="curSlotName" />
+      <slot :name="modelValue" />
     </div>
   </div>
 </template>
