@@ -66,10 +66,6 @@ export default defineNuxtConfig({
     lazy: true,
     langDir: 'locales',
     defaultLocale: 'en',
-    vueI18n: {
-      legacy: false,
-      locale: 'en',
-    },
   },
 
   unocss: {
