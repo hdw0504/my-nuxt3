@@ -1,15 +1,11 @@
 <script setup lang="ts">
 import type { ComponentProp } from '~~/types'
 
-// const tabs: Tab[] = [
 const tabs: ComponentProp<'Tab', 'tabs'> = [
-  { label: 'title1', value: 1, slotKey: 't1' },
-  { label: 'title2', value: 2, slotKey: 't2' },
+  { title: 'title1', slotKey: 't1' },
+  { title: 'title2', slotKey: 't2' },
 ]
-// const type: ComponentPropsMap<'Tab', 'modelValue'> = {
-//   modelValue: '',
-// }
-const curTab = ref(1)
+const curTab = ref('t1')
 </script>
 
 <template>
