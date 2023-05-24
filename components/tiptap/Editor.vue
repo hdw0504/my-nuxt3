@@ -46,7 +46,7 @@ function publish() {
 
 <template>
   <div>
-    <EditorContent :class="editorClass" :editor="editor" />
+    <EditorContent class="flex" :class="editorClass" :editor="editor" />
 
     <div flex justify-between items-center mt-2>
       <div flex items-center gap-2>

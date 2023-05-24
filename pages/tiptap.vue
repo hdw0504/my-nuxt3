@@ -16,7 +16,7 @@ const showHtml = ref(true)
       </div>
     </div>
 
-    <div flex flex-col justify-center items-center>
+    <div flex flex-col justify-center items-center text-left>
       <tiptap-editor class="editor" editor-class="min-h-20vh max-h-30vh of-auto" @submit="handleEditorText" />
 
       <template v-if="editorText">

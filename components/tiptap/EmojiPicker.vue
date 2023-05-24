@@ -5,19 +5,19 @@ const emit = defineEmits<{
   (e: 'select', code: string): void
 }>()
 
-const el = $ref<HTMLElement>()
-let picker = $ref<Picker>()
+const el = ref<HTMLElement>()
+let picker = ref<Picker>()
 const colorMode = useColorMode()
 async function openEmojiPicker() {
-  if (picker) {
-    picker.update({
+  if (picker.value) {
+    picker.value.update({
       theme: colorMode.value,
     })
   }
   else {
     const promise = import('@emoji-mart/data/sets/14/twitter.json').then(r => r.default)
     const { Picker } = await import('emoji-mart')
-    picker = new Picker({
+    picker.value = new Picker({
       searchPosition: 'none',
       data: () => promise,
       onEmojiSelect({ native, src, alt, name }: any) {
@@ -28,12 +28,12 @@ async function openEmojiPicker() {
     })
   }
   // TODO: custom picker
-  el?.appendChild(picker as any as HTMLElement)
+  el.value?.appendChild(picker as any as HTMLElement)
 }
 
 function hideEmojiPicker() {
   if (picker)
-    el?.removeChild(picker as any as HTMLElement)
+    el.value?.removeChild(picker as any as HTMLElement)
 }
 </script>
 

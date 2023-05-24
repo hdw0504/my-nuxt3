@@ -5,13 +5,13 @@ const emit = defineEmits<{
   (event: 'select', elStr: string): void
 }>()
 
-const formRef = $ref<FormInstance>()
-const formModel = $ref({
+const formRef = ref<FormInstance>()
+const formModel = ref({
   text: '',
   link: '',
 })
 
-const rules = $ref<FormRules>({
+const rules = ref<FormRules>({
   text: [{ required: true, message: 'Please input link text', trigger: 'blur' }],
   link: [
     { required: true, message: 'Please input link address', trigger: 'blur' },
@@ -30,20 +30,20 @@ function validateLink(rule: any, value: any, callback: any) {
 }
 
 async function checkAndInsert() {
-  if (!formRef)
+  if (!formRef.value)
     return
-  const isValid = await formRef.validate()
+  const isValid = await formRef.value.validate()
   if (!isValid)
     return
 
-  emit('select', ` <a href="${formModel.link}" target="_blank">${formModel.text}</a> `)
+  emit('select', ` <a href="${formModel.value.link}" target="_blank">${formModel.value.text}</a> `)
   resetFrom()
 }
 
 function resetFrom() {
-  if (!formRef)
+  if (!formRef.value)
     return
-  formRef.resetFields()
+  formRef.value.resetFields()
 }
 </script>
 

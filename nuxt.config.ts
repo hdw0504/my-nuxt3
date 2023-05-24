@@ -16,6 +16,7 @@ export default defineNuxtConfig({
     '@element-plus/nuxt',
     '@nuxtjs/i18n',
     'unplugin-icons/nuxt',
+    'nuxt-swiper',
   ],
 
   imports: {
@@ -66,10 +67,14 @@ export default defineNuxtConfig({
     lazy: true,
     langDir: 'locales',
     defaultLocale: 'en',
-    vueI18n: {
-      legacy: false,
-      locale: 'en',
-    },
+  },
+
+  swiper: {
+    // Swiper options
+    // ----------------------
+    // prefix: 'Swiper',
+    // styleLang: 'css',
+    modules: ['autoplay', 'controller'],
   },
 
   unocss: {
@@ -79,10 +84,6 @@ export default defineNuxtConfig({
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
     keepalive: true,
-  },
-
-  experimental: {
-    reactivityTransform: true,
   },
 
   vite: {
