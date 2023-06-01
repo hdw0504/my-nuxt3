@@ -17,15 +17,11 @@ function handleSelect(key: string) {
 </script>
 
 <template>
-  <header
-    sticky top-0 z-10
-    w-full
-    b-gray-200 dark:b-gray-700 transition-all-400
-    :class="[$attrs.class, y === 0 ? 'b-none h-30' : 'b-b h-[var(--header-height)]']"
-  >
+  <header sticky top-0 z-10 w-full b-gray-200 dark:b-gray-700 transition-all-400
+    :class="[$attrs.class, y === 0 ? 'b-none h-30' : 'b-b h-[var(--header-height)]']">
     <div mx-auto w-full max-w-7xl grid h-full grid-cols-12 lg:gap-8>
-      <div flex items-center justify-center flex-none col-span-2>
-        <el-dropdown trigger="click">
+    <div flex items-center justify-center flex-none col-span-2>
+      <el-dropdown trigger="click">
           <span class="el-dropdown-link" lg:hidden>
             <i-carbon-text-align-justify />
           </span>
@@ -42,13 +38,23 @@ function handleSelect(key: string) {
       <div flex items-center justify-center flex-1 col-span-8>
         <Logo flex lg:hidden />
         <!-- <nav hidden lg:flex>
-          nav
-        </nav> -->
+                      nav
+                    </nav> -->
       </div>
       <div flex items-center justify-center flex-none col-span-2 gap-2 lg:gap-4>
+        <NuxtLink :to="localePath({ name: 'tools' })">
+          <i-mdi-tools />
+        </NuxtLink>
+
         <Language />
-        <div i-mdi-comment-edit-outline cursor-pointer @click="router.push(localePath({ name: 'tiptap' }))" />
-        <a i-carbon-logo-github text-current href="https://github.com/hdw0504/my-nuxt3" target="_blank" aria-label="github" />
+
+        <NuxtLink :to="localePath({ name: 'tiptap' })">
+          <i-mdi-comment-edit-outline />
+        </NuxtLink>
+
+        <NuxtLink to="https://github.com/hdw0504/my-nuxt3" target="_blank" aria-label="github">
+          <i-carbon-logo-github text-current />
+        </NuxtLink>
         <DarkToggle />
       </div>
     </div>
@@ -56,7 +62,7 @@ function handleSelect(key: string) {
 </template>
 
 <style lang="scss" scoped>
-header{
-    backdrop-filter: saturate(50%) blur(.3em);
+header {
+  backdrop-filter: saturate(50%) blur(.3em);
 }
 </style>

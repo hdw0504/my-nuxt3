@@ -9,9 +9,12 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    ICarbonLogoGithub: typeof import('~icons/carbon/logo-github')['default']
     ICarbonTextAlignJustify: typeof import('~icons/carbon/text-align-justify')['default']
     IEpFolder: typeof import('~icons/ep/folder')['default']
     IEpMonitor: typeof import('~icons/ep/monitor')['default']
+    IMdiCommentEditOutline: typeof import('~icons/mdi/comment-edit-outline')['default']
+    IMdiTools: typeof import('~icons/mdi/tools')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

@@ -7,6 +7,7 @@ import { FileSystemIconLoader } from 'unplugin-icons/loaders'
 export default defineNuxtConfig({
   modules: [
     '@nuxt/devtools',
+    '@nuxt/image-edge',
     '@vueuse/nuxt',
     '@pinia/nuxt',
     '@unocss/nuxt',
@@ -19,26 +20,16 @@ export default defineNuxtConfig({
     'nuxt-swiper',
   ],
 
-  imports: {
-    // Auto-import pinia stores defined in `~/stores`
-    dirs: ['stores'],
-  },
-
-  components: {
-    dirs: [
-      {
-        path: '~/components',
-        global: true,
-      },
-      '~/components/layout',
-    ],
-  },
-
   css: [
     // '@unocss/reset/tailwind.css',
     '@unocss/reset/eric-meyer.css',
     '~/assets/style/index.scss', // global css
   ],
+
+  imports: {
+    // Auto-import pinia stores defined in `~/stores`
+    dirs: ['stores'],
+  },
 
   elementPlus: {
     importStyle: 'scss',
@@ -83,7 +74,8 @@ export default defineNuxtConfig({
 
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
-    keepalive: true,
+    buildAssetsDir: 'static',
+    // keepalive: true,
   },
 
   vite: {
@@ -95,7 +87,7 @@ export default defineNuxtConfig({
       preprocessorOptions: {
         scss: {
           // 主题定制方案 (not as *)
-          additionalData: '@use "@/assets/style/element/index.scss";',
+          additionalData: '@use "~/assets/style/element/index.scss";',
         },
       },
     },

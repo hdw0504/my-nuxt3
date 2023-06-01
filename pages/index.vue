@@ -76,10 +76,9 @@ const projects = [
       </div>
       <div w-full lg="flex-1">
         <div m-x-auto max-w-536px>
-          <lazy-image
-            class="rd-4! img-resize shadow-2xl"
-            :width="536" :height="354"
-            src="https://picsum.photos/536/354" alt="picsum photo"
+          <LazyImage
+            class="rd-4! img-resize shadow-2xl" :width="536" :height="354" src="https://picsum.photos/536/354"
+            alt="picsum photo"
           />
         </div>
       </div>
@@ -115,17 +114,11 @@ const projects = [
           </div>
           <div flex-1 md="max-w-500px">
             <img
-              img-resize
-              block dark:hidden
-              transition-all-400 hover:shadow-lg
-              width="927" height="927" loading="lazy"
+              img-resize block dark:hidden transition-all-400 hover:shadow-lg width="927" height="927" loading="lazy"
               :src="project.img" alt="website shortcut"
             >
             <img
-              img-resize
-              dark:block hidden
-              transition-all-400 hover:shadow-lg
-              width="927" height="927" loading="lazy"
+              img-resize dark:block hidden transition-all-400 hover:shadow-lg width="927" height="927" loading="lazy"
               :src="project.darkImg" alt="website shortcut"
             >
           </div>
@@ -152,7 +145,8 @@ const projects = [
 .el-image {
   --at-apply: transition-all-400 hover:shadow-lg;
 }
-.logo span::after{
+
+.logo span::after {
   content: '...';
   --at-apply: vertical-bottom color-fade;
 }

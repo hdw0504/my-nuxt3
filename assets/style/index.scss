@@ -17,6 +17,12 @@ html {
   color: var(--text-color);
 }
 
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+
 ::-webkit-scrollbar {
   --at-apply: w-6px;
 

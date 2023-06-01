@@ -1,9 +1,8 @@
 {
-  "homeTitle": "My Nuxt3 Practice",
-  "use": "use with",
-  "repositorie": "repositorie",
-  "website": "website",
   "buildBY": "build by",
+  "generate": "generate",
+  "generateTaobao": "Generate Taobao Link",
+  "homeTitle": "My Nuxt3 Practice",
   "lastUpdate": "last update",
   "project": {
     "about": "About",
@@ -12,5 +11,8 @@
       "elNuxt": "A template with nuxt3 + element-plus",
       "nodeDoc": "A Chinese translation of the document from node.js 18"
     }
-  }
+  },
+  "repositorie": "repositorie",
+  "use": "use with",
+  "website": "website"
 }

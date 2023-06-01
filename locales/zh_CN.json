@@ -1,9 +1,8 @@
 {
-  "homeTitle": "个人 Nuxt3 练习 ",
-  "use": "使用",
-  "repositorie": "仓库",
-  "website": "网址",
   "buildBY": "创建者",
+  "generate": "生成",
+  "generateTaobao": "淘宝直链生成器",
+  "homeTitle": "个人 Nuxt3 练习 ",
   "lastUpdate": "更新时间",
   "project": {
     "about": "项目介绍",
@@ -12,5 +11,8 @@
       "elNuxt": "使用 nuxt3 + element-plus 的模板",
       "nodeDoc": "node18 中文文档"
     }
-  }
+  },
+  "repositorie": "仓库",
+  "use": "使用",
+  "website": "网址"
 }

@@ -21,6 +21,4 @@ const curTab = ref('t1')
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -38,7 +38,7 @@ const showHtml = ref(true)
 </template>
 
 <style lang="scss" scoped>
-.editor{
+.editor {
   --at-apply: w-50vw b rd-4 px-4 py-2;
 }
 </style>
