@@ -1,10 +1,4 @@
 <script lang="ts" setup>
-import IconElPlus from '~icons/icons/element-plus'
-import IconVueuse from '~icons/icons/vueuse'
-import IconUnocss from '~icons/icons/unocss'
-import IconPinia from '~icons/icons/pinia'
-import IconVite from '~icons/icons/vite'
-
 // test api
 // const { data, pending, error, refresh } = await useLazyFetch('/api/test/tom?gender=male', {
 //   method: 'post',
@@ -21,11 +15,11 @@ const router = useRouter()
 const localePath = useLocalePath()
 
 const icons = [
-  { name: 'Element Plus', icon: IconElPlus },
-  { name: 'Vueuse', icon: IconVueuse },
-  { name: 'Unocss', icon: IconUnocss },
-  { name: 'Pinia', icon: IconPinia },
-  { name: 'Vite', icon: IconVite },
+  { name: 'Element Plus', icon: 'element-plus' },
+  { name: 'Vueuse', icon: 'vueuse' },
+  { name: 'Unocss', icon: 'unocss' },
+  { name: 'Pinia', icon: 'pinia' },
+  { name: 'Vite', icon: 'vite' },
 ]
 
 const projects = [
@@ -66,17 +60,16 @@ const projects = [
         </p>
         <p class="logo" text-4>
           {{ $t('use') }}
-          <span display="block md:inline-block" lg="children:animate-none!" m-t="2 md:none" svg="w-1.2em h-1.2em">
-            <component
-              :is="item.icon" v-for="item in icons" :key="item.name"
-              @click="router.push(localePath({ name: 'feature', query: { name: item.name } }))"
-            />
+          <span display="block md:inline-block" lg="children:animate-none!" m-t="2 md:none">
+            <NuxtLink v-for="item in icons" :key="item.name" class=" text-6 lg:text-8" :to="localePath({ name: 'feature', query: { name: item.name } })">
+              <NuxtIcon class="inline-block mr-1" :name="item.icon" filled />
+            </NuxtLink>
           </span>
         </p>
       </div>
       <div w-full lg="flex-1">
         <div m-x-auto max-w-536px>
-          <LazyImage
+          <LoadImage
             class="rd-4! img-resize shadow-2xl" :width="536" :height="354" src="https://picsum.photos/536/354"
             alt="picsum photo"
           />
@@ -93,11 +86,11 @@ const projects = [
             </p>
             <div>
               <el-link v-if="project.repo" mr-4 :underline="false" :href="project.repo" target="_blank">
-                <i-ep-folder text-4 mr-2 />
+                <div i-ep-folder text-4 mr-2 />
                 <span display="none md:inline">{{ $t('repositorie') }}</span>
               </el-link>
               <el-link :underline="false" :href="project.website" target="_blank">
-                <i-ep-monitor text-4 mr-2 />
+                <div i-ep-monitor text-4 mr-2 />
                 <span display="none md:inline">{{ $t('website') }}</span>
               </el-link>
             </div>
@@ -142,11 +135,7 @@ const projects = [
   }
 }
 
-.el-image {
-  --at-apply: transition-all-400 hover:shadow-lg;
-}
-
-.logo span::after {
+.logo > span::after {
   content: '...';
   --at-apply: vertical-bottom color-fade;
 }

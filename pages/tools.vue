@@ -15,8 +15,28 @@ async function handleLink() {
     },
   })
   console.log(data)
-  goodInfo.value = data
+  goodInfo.value = data.value!
+  initSkuConfig()
 }
+
+const propList = ref<string[][]>([['1', '2'], []])
+const skuDict = reactive<Record<string, string>>({})
+function initSkuConfig() {
+  propList.value = Array(goodInfo.value?.skuBase?.props.length ?? 0).fill([]);
+
+  (goodInfo.value?.skuBase?.skus ?? []).forEach(({ skuId, propPath }) => {
+    skuDict[propPath] = skuId
+  })
+}
+
+function setPropKey(pid: string, vid: string, index: number) {
+  propList.value[index] = [pid, vid]
+}
+
+const totalSku = computed(() => {
+  const propPath = propList.value.map(i => i.join(':')).join(';')
+  return skuDict[propPath] ?? ''
+})
 </script>
 
 <template>
@@ -35,17 +55,40 @@ async function handleLink() {
       </ElButton>
     </div>
 
-    <div v-if="goodInfo">
-      <div>
-        {{ goodInfo }}
+    <div v-if="totalSku" class="mt-6">
+      totalSku:{{ totalSku }}
+    </div>
+
+    <div v-if="goodInfo" class="mt-6">
+      <div v-if="goodInfo.item" class="flex gap-4 justify-center items-center mb-2">
+        <NuxtImg v-if="goodInfo.item.images.length" class="w-30 h-30 rd-4" :src="`https:${goodInfo.item.images[0]}`" />
+        <p class="md:max-w-40% lh-6 text-left">
+          {{ goodInfo.item.title }}
+        </p>
       </div>
-      ---
-      <NuxtImg v-if="goodInfo?.item?.images.length" :src="goodInfo.item.images[0]" />
-      <div>
-        {{ goodInfo }}
+
+      <div v-if="goodInfo.skuBase" class="mx-auto" md="max-w-50%">
+        <div v-for="(group, i) in goodInfo.skuBase.props" :key="group.pid" class="mb-2">
+          <p class="lh-6 font-bold text-left">
+            {{ group.name }}
+          </p>
+          <div class="flex flex-wrap gap-2px">
+            <p v-for="item in group.values" :key="item.vid" class="tag" :class="{ active: propList[i]?.[1] === item.vid }" @click="setPropKey(group.pid, item.vid, i)">
+              {{ item.name }}
+            </p>
+          </div>
+        </div>
+        <!-- {{ goodInfo.skuBase.skus }} -->
       </div>
     </div>
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.tag{
+  --at-apply: py-1.5 px-4 rd-6 b b-solid cursor-pointer;
+  &.active{
+    --at-apply: text-#fff bg-[var(--el-color-warning)]
+  }
+}
+</style>

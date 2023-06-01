@@ -1,8 +1,4 @@
 import dayjs from 'dayjs'
-import Components from 'unplugin-vue-components/vite'
-import IconsResolver from 'unplugin-icons/resolver'
-import Icons from 'unplugin-icons/vite'
-import { FileSystemIconLoader } from 'unplugin-icons/loaders'
 
 export default defineNuxtConfig({
   modules: [
@@ -16,14 +12,14 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@element-plus/nuxt',
     '@nuxtjs/i18n',
-    'unplugin-icons/nuxt',
     'nuxt-swiper',
+    'nuxt-icons',
   ],
 
   css: [
     // '@unocss/reset/tailwind.css',
     '@unocss/reset/eric-meyer.css',
-    '~/assets/style/index.scss', // global css
+    '~/styles/index.scss', // global css
   ],
 
   imports: {
@@ -87,27 +83,9 @@ export default defineNuxtConfig({
       preprocessorOptions: {
         scss: {
           // 主题定制方案 (not as *)
-          additionalData: '@use "~/assets/style/element/index.scss";',
+          additionalData: '@use "~/styles/element/index.scss";',
         },
       },
     },
-    plugins: [
-      Components({
-        dts: true,
-        resolvers: [
-          IconsResolver({
-            // prefix: 'i', // defalt prefix
-            customCollections: ['icons'],
-          }),
-        ],
-      }),
-      // https://github.com/antfu/unplugin-icons
-      Icons({
-        autoInstall: true,
-        customCollections: {
-          icons: FileSystemIconLoader('./assets/icons'),
-        },
-      }),
-    ],
   },
 })

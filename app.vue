@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { ID_INJECTION_KEY } from 'element-plus'
-
 useHead({
   title: 'HDW🎨',
   link: [
@@ -13,11 +11,6 @@ useHead({
   htmlAttrs: {
     lang: 'zh',
   },
-})
-
-provide(ID_INJECTION_KEY, {
-  prefix: 1024,
-  current: 0,
 })
 </script>
 

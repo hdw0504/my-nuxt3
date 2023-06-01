@@ -1,17 +1,10 @@
 <script setup lang="ts">
 import type { WritableComputedRef } from 'vue'
-import IconNuxt from '~icons/icons/nuxt'
-import IconVue from '~icons/icons/vuejs'
-import IconElPlus from '~icons/icons/element-plus'
-import IconVueuse from '~icons/icons/vueuse'
-import IconUnocss from '~icons/icons/unocss'
-import IconPinia from '~icons/icons/pinia'
-import IconVite from '~icons/icons/vite'
 
 // when open keepalive that offsetTop is incorrect
-definePageMeta({
-  keepalive: false,
-})
+// definePageMeta({
+//   keepalive: false,
+// })
 
 const router = useRouter()
 
@@ -20,49 +13,49 @@ const route = useRoute()
 const features = [
   {
     name: 'Nuxt',
-    icon: IconNuxt,
+    icon: 'nuxt',
     href: 'https://nuxt.com/',
     img: '/image/website/nuxt-light.png',
     darkImg: '/image/website/nuxt-dark.png',
   },
   {
     name: 'Vue',
-    icon: IconVue,
+    icon: 'vuejs',
     href: 'https://vuejs.org/',
     img: '/image/website/vue-light.png',
     darkImg: '/image/website/vue-dark.png',
   },
   {
     name: 'Element Plus',
-    icon: IconElPlus,
+    icon: 'element-plus',
     href: 'https://element-plus.org/',
     img: '/image/website/el-plus-light.png',
     darkImg: '/image/website/el-plus-dark.png',
   },
   {
     name: 'Vueuse',
-    icon: IconVueuse,
+    icon: 'vueuse',
     href: 'https://vueuse.org/',
     img: '/image/website/vueuse-light.png',
     darkImg: '/image/website/vueuse-dark.png',
   },
   {
     name: 'Unocss',
-    icon: IconUnocss,
+    icon: 'unocss',
     href: 'https://uno.antfu.me/',
     img: '/image/website/unocss-light.png',
     darkImg: '/image/website/unocss-dark.png',
   },
   {
     name: 'Pinia',
-    icon: IconPinia,
+    icon: 'pinia',
     href: 'https://pinia.vuejs.org/',
     img: '/image/website/pinia-light.png',
     darkImg: '/image/website/pinia-dark.png',
   },
   {
     name: 'Vite',
-    icon: IconVite,
+    icon: 'vite',
     href: 'https://vitejs.dev/',
     img: '/image/website/vite-light.png',
     darkImg: '/image/website/vite-dark.png',
@@ -104,14 +97,16 @@ onMounted(() => {
     <div v-for="(item, inx) in features" :key="item.name" flex="~ col lg:row" gap-12 :class="{ 'lg:flex-row-reverse': inx % 2 }">
       <div flex-1>
         <div flex justify-center items-center gap-2 text-2xl font-bold svg="w-1.2em h-1.2em">
-          <component :is="item.icon" />
+          <NuxtIcon class="inline-block mr-1" :name="item.icon" filled />
           <span :id="item.name" :ref="setItemRef(item.name)">{{ item.name }}</span>
         </div>
       </div>
       <div w-full lg="flex-1">
         <div m-x-auto max-w-536px>
-          <img img-resize shadow-2xl cursor-pointer block dark:hidden width="536" height="536" loading="lazy" :src="item.img" alt="website shortcut" @click="openWebsite(item.href)">
-          <img img-resize shadow-2xl cursor-pointer hidden dark:block width="536" height="536" loading="lazy" :src="item.darkImg" alt="website shortcut" @click="openWebsite(item.href)">
+          <NuxtLink :href="item.href" target="_blank">
+            <NuxtImg img-resize shadow-2xl cursor-pointer block dark:hidden width="536" height="536" loading="lazy" :src="item.img" alt="website shortcut" />
+            <NuxtImg img-resize shadow-2xl cursor-pointer hidden dark:block width="536" height="536" loading="lazy" :src="item.darkImg" alt="website shortcut" />
+          </NuxtLink>
         </div>
       </div>
     </div>
