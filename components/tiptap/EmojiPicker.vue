@@ -6,29 +6,29 @@ const emit = defineEmits<{
 }>()
 
 const el = ref<HTMLElement>()
-let picker = ref<Picker>()
+const picker = ref<Picker>()
 const colorMode = useColorMode()
 async function openEmojiPicker() {
-  if (picker.value) {
-    picker.value.update({
-      theme: colorMode.value,
-    })
-  }
-  else {
-    const promise = import('@emoji-mart/data/sets/14/twitter.json').then(r => r.default)
-    const { Picker } = await import('emoji-mart')
-    picker.value = new Picker({
-      searchPosition: 'none',
-      data: () => promise,
-      onEmojiSelect({ native, src, alt, name }: any) {
-        emit('select', native)
-      },
-      set: 'twitter',
-      theme: colorMode.value,
-    })
-  }
+  const [Picker, dataPromise] = await Promise.all([
+    import('emoji-mart').then(({ Picker }) => Picker),
+    import('@emoji-mart/data/sets/14/twitter.json')
+      .then((r: any) => r.default)
+      .catch(() => {}),
+  ])
+
+  picker.value = new Picker({
+    searchPosition: 'none',
+    data: () => dataPromise,
+    onEmojiSelect({ native }: any) {
+      emit('select', native)
+    },
+    set: 'twitter',
+    theme: colorMode.value,
+  })
+  // }
+  await nextTick()
   // TODO: custom picker
-  el.value?.appendChild(picker as any as HTMLElement)
+  el.value?.appendChild(picker.value as any as HTMLElement)
 }
 
 function hideEmojiPicker() {

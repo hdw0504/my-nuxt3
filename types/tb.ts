@@ -3,13 +3,13 @@ interface Sku {
   propPath: string
 }
 
-interface Pid {
+export interface Pid {
   pid: string
   name: string
   values: Vid[]
 }
 
-interface Vid {
+export interface Vid {
   vid: string
   name: string
   image: string

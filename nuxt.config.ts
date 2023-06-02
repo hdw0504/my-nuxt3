@@ -74,6 +74,12 @@ export default defineNuxtConfig({
     // keepalive: true,
   },
 
+  runtimeConfig: {
+    public: {
+      env: 'development',
+    },
+  },
+
   vite: {
     // need add declare from xxx.d.ts
     define: {

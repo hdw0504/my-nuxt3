@@ -1,6 +1,9 @@
 {
   "buildBY": "build by",
+  "buyNum": "buy number",
+  "copySuccess": "Has been copied to the clipboard",
   "generate": "generate",
+  "generateSingleBp": "generate BP",
   "generateTaobao": "Generate Taobao Link",
   "homeTitle": "My Nuxt3 Practice",
   "lastUpdate": "last update",
