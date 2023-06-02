@@ -1,6 +1,8 @@
 {
+  "appendToCart": "append to cart",
   "buildBY": "build by",
   "buyNum": "buy number",
+  "cart": "Cart",
   "copySuccess": "Has been copied to the clipboard",
   "generate": "generate",
   "generateSingleBp": "generate BP",

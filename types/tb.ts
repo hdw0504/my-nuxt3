@@ -32,3 +32,10 @@ export interface GoodDetail {
   skuBase?: SkuBase
   [key: string]: any
 }
+
+export type SkuMatcher = [Pid, Vid]
+
+export interface CartItem {
+  info: GoodInfo
+  sku: SkuMatcher[]
+}
