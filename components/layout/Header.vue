@@ -44,9 +44,7 @@ function handleSelect(key: string) {
                     </nav> -->
       </div>
       <div flex items-center justify-center flex-none col-span-2 gap-2 lg:gap-4>
-        <NuxtLink :to="localePath({ name: 'tools' })">
-          <div i-mdi-tools />
-        </NuxtLink>
+        <Tools />
 
         <Language />
 
