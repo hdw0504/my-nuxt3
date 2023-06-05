@@ -31,7 +31,7 @@ defineExpose({
           img-class="w-20 h-20 rd-3"
           info-class="lh-6 text-left"
         />
-        <div v-for="(sku, inx) in good.sku" :key="inx" class="flex gap-2 mb-1">
+        <div v-for="(sku, inx) in good.matcher" :key="inx" class="flex gap-2 mb-1">
           <p v-for="(item, index) in sku" :key="index">
             {{ item.name }}
           </p>

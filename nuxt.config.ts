@@ -2,7 +2,7 @@ import dayjs from 'dayjs'
 
 export default defineNuxtConfig({
   modules: [
-    '@nuxt/devtools',
+    // '@nuxt/devtools',
     '@nuxt/image-edge',
     '@vueuse/nuxt',
     '@pinia/nuxt',

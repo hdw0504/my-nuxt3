@@ -37,5 +37,7 @@ export type SkuMatcher = [Pid, Vid]
 
 export interface CartItem {
   info: GoodInfo
-  sku: SkuMatcher[]
+  matcher: SkuMatcher[]
+  num: number
+  sku: string
 }
