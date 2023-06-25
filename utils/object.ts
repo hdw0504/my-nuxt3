@@ -40,8 +40,29 @@ export function omit<T extends Record<string, any>, K extends keyof T>(
   obj: T,
   keys: K[],
 ): Omit<T, K> {
-  return Object.entries(obj).reduce((prev, [k, v]) => {
-    !keys.includes(k as K) && (prev[k as K] = v)
-    return prev
-  }, {} as T)
+  // return Object.entries(obj).reduce((prev, [k, v]) => {
+  //   !keys.includes(k as K) && (prev[k as K] = v)
+  //   return prev
+  // }, {} as T)
+
+  return Object.fromEntries(
+    Object.entries(obj).filter(([k]) => !keys.includes(k as K)),
+  ) as Omit<T, K>
+}
+
+/** TS Pick 方法 */
+export function pick<T extends Record<string, any>, K extends keyof T>(
+  obj: T,
+  keys: K[],
+): Pick<T, K> {
+  // return keys.reduce((acc, key) => {
+  //   if (Object.prototype.hasOwnProperty.call(obj, key)) {
+  //     acc[key] = obj[key]
+  //   }
+  //   return acc
+  // }, {} as Pick<T, K>)
+
+  return Object.fromEntries(
+    Object.entries(obj).filter(([k]) => keys.includes(k as K)),
+  ) as Pick<T, K>
 }

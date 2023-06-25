@@ -1,3 +1,6 @@
+import type { DefalutResult, XhsImage, XhsResult } from '~/types/xhs'
+import { pick } from '~/utils/object'
+
 const defaltLinkMatcher = /https\:\/\/www.xiaohongshu.com\/explore\/\S{24}/
 /** 判断是否小红书正常链接 */
 function isXhsDefaultLink(url: string) {
@@ -43,21 +46,59 @@ function getDetailLink(id: string) {
   return `https://www.xiaohongshu.com/explore/${id}`
 }
 
-/** 获取文章内容 */
-async function getNoteFromLink(detaiUrl: string) {
+/** 请求详情地址 */
+function fetchDetail(utl: string) {
   const headers = {
     Cookie: 'webBuild=2.11.4; xsecappid=xhs-pc-web; a1=188dcf74921awzcv1iexkk7t1uicq1sf8sxuwtgy750000399626; webId=465307e31c5a75159cbede2b1fce2391; gid=yYYfSiW40fYdyYYfSiW4jM9kJy0EuShy3dCTCvWTW9y73728SAyMiE888qjjKJK8WSJDi0qS; gid.sign=7BhnF3qvGPcTjTTR/tHhuKwkYyQ=; web_session=030037a3a1f992378ae8aaebea234a11891d74; websectiga=f3d8eaee8a8c63016320d94a1bd00562d516a5417bc43a032a80cbf70f07d5c0; sec_poison_id=1877a643-c70e-4abf-aaeb-e632bd16a6e6',
   }
 
-  const data: string = await $fetch(detaiUrl, {
+  return $fetch<string>(utl, {
     headers,
   })
+}
 
-  const matcher = data.match(/window\.__INITIAL_STATE__=(.*?)(?=<\/script>)/gi)
-  const info = (matcher?.[0] ?? '=').split('=')
+/** 获取文章内容 */
+async function getNoteFromLink(detaiUrl: string) {
+  let matcher: RegExpMatchArray | null = null
 
+  while (!matcher) {
+    const data = await fetchDetail(detaiUrl)
+    // 防止获取不到内容
+    matcher = data.match(/window\.__INITIAL_STATE__=(.*?)(?=<\/script>)/gi)
+  }
+
+  // 匹配获取内容并转成json
+  const info = matcher![0].split('=')
   const detail = info[1].replaceAll('undefined', '""')
-  return JSON.parse(detail)
+  return JSON.parse(detail) as DefalutResult
+}
+
+/** 参考第三方爬取内容，转成xhs图片内容 */
+function handleImgList(imgList: XhsImage[]) {
+  return imgList.map(i => `https://ci.xiaohongshu.com/${i.traceId}?imageView2/2/w/0/format/jpg/v3`)
+}
+
+/** 防止被发现原链数据，自己过滤返回内容 */
+function handleResult(data?: DefalutResult): XhsResult {
+  let user: XhsResult['user'] = {
+    avatar: '',
+    nickname: '',
+  }
+  let info: XhsResult['info'] = {
+    title: '',
+    desc: '',
+    imgList: [],
+  }
+
+  if (data) {
+    user = pick(data.note.note.user, ['avatar', 'nickname'])
+    info = {
+      ...pick(data.note.note, ['title', 'desc']),
+      imgList: handleImgList(data.note.note.imageList),
+    }
+  }
+
+  return { user, info }
 }
 
 export default defineEventHandler(async (event) => {
@@ -71,12 +112,12 @@ export default defineEventHandler(async (event) => {
   else if (isXhsShortLink(url)) {
     const shortLink = await pickXhsShortLink(url)
     if (!shortLink)
-      return ''
+      return handleResult()
     console.log('短链：', shortLink)
 
     const lonkLink = await getLongLink(shortLink)
     if (!lonkLink)
-      return ''
+      return handleResult()
     console.log('长链：', lonkLink)
 
     const id = matchIdFromUrl(lonkLink)
@@ -85,7 +126,6 @@ export default defineEventHandler(async (event) => {
 
   console.log('详情链接：', detailLink)
   const data = await getNoteFromLink(detailLink)
-  return data
 
-  return ''
+  return handleResult(data)
 })

@@ -1,4 +1,4 @@
-export interface Image {
+export interface XhsImage {
   traceId: string
   fileId: string
   height: number
@@ -18,7 +18,7 @@ export interface Note {
   // interactInfo: InteractInfo$2Type
   // lastUpdateTime: number
   ipLocation: string
-  imageList: Image[]
+  imageList: XhsImage[]
   // tagList: Array< TagList$4Type >
   // atUserList: Array< unknow >
   // time: number
@@ -28,10 +28,23 @@ export interface Note {
   user: User
 }
 
-export interface DetailResult {
+export interface DefalutResult {
   note: {
     note: Note
     [key: string]: any
   }
   [key: string]: any
+}
+
+export interface XhsResult {
+  user: {
+    avatar: string
+    nickname: string
+  }
+  info: {
+    title: string
+    desc: string
+    imgList: string[]
+  }
+
 }

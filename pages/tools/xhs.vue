@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { DetailResult, Note } from '~/types/xhs'
+import type { XhsResult } from '~/types/xhs'
 
-const link = ref('xxxxx http://xhslink.com/6sh9Oq xxxx')
+const link = ref('0 盏鬼表情包（日更）发布了一篇小红书笔记，快来看吧！ 😆 v7xV8hXzZLH5E1S 😆 http://xhslink.com/2dHEwr，复制本条信息，打开【小红书】App查看精彩内容！')
 
-const note = ref<Note>()
+const detail = ref<XhsResult>()
 async function handleLink() {
-  const { data } = await useFetch<DetailResult>('/api/xhs', {
+  const { data } = await useFetch<XhsResult>('/api/xhs', {
     method: 'post',
     body: {
       url: link.value,
@@ -13,7 +13,7 @@ async function handleLink() {
   })
   console.log('res', data)
 
-  note.value = data.value?.note.note
+  detail.value = data.value!
 }
 </script>
 
@@ -32,27 +32,27 @@ async function handleLink() {
       </div>
     </div>
 
-    <div v-if="note" class="mx-auto mt-6 flex flex-col gap-4" md="max-w-50%">
+    <div v-if="detail" class="mx-auto mt-6 flex flex-col gap-4" md="max-w-50%">
       <p class="text-xl font-bold">
         文章内容
       </p>
       <!-- 用户信息 -->
       <div class="flex items-center gap-2">
-        <NuxtImg class="w-12 h-12 rd-50%" :src="note.user.avatar" />
-        <p>{{ note.user.nickname }}</p>
+        <NuxtImg class="w-12 h-12 rd-50%" :src="detail.user.avatar" />
+        <p>{{ detail.user.nickname }}</p>
       </div>
       <!-- 文章详情 -->
       <div class="text-left">
         <p class="text-5 lh-8 mb-1 font-bold">
-          {{ note.title }}
+          {{ detail.info.title }}
         </p>
-        <span class="lh-6" v-html="note.desc" />
+        <span class="lh-6" v-html="detail.info.desc" />
       </div>
 
       <!-- 图片内容 -->
       <div class="flex flex-wrap gap-2">
-        <template v-for="img in note.imageList" :key="img.traceId">
-          <NuxtImg class="w-40 h-40" :src="img.url" />
+        <template v-for="img in detail.info.imgList" :key="img">
+          <NuxtImg class="w-full h-auto" md="w-40 h-40" :src="img" />
         </template>
       </div>
     </div>
