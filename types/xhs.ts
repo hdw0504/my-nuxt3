@@ -30,7 +30,13 @@ export interface Note {
 
 export interface DefalutResult {
   note: {
-    note: Note
+    firstNoteId: string
+    noteDetailMap: {
+      [key: string]: {
+        note: Note
+        [key: string]: any
+      }
+    }
     [key: string]: any
   }
   [key: string]: any

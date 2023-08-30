@@ -1,4 +1,4 @@
-import type { DefalutResult, XhsImage, XhsResult } from '~/types/xhs'
+import type { DefalutResult, Note, XhsImage, XhsResult } from '~/types/xhs'
 import { pick } from '~/utils/object'
 
 const defaltLinkMatcher = /https\:\/\/www.xiaohongshu.com\/explore\/\S{24}/
@@ -91,10 +91,15 @@ function handleResult(data?: DefalutResult): XhsResult {
   }
 
   if (data) {
-    user = pick(data.note.note.user, ['avatar', 'nickname'])
-    info = {
-      ...pick(data.note.note, ['title', 'desc']),
-      imgList: handleImgList(data.note.note.imageList),
+    const { noteDetailMap = {}, firstNoteId = '' } = data.note
+    const curNote = noteDetailMap[firstNoteId]?.note as Note
+
+    if (curNote) {
+      user = pick(curNote.user, ['avatar', 'nickname'])
+      info = {
+        ...pick(curNote, ['title', 'desc']),
+        imgList: handleImgList(curNote.imageList),
+      }
     }
   }
 
