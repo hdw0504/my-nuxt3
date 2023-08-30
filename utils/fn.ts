@@ -1,6 +1,5 @@
-// eslint-disable-next-line unicorn/prefer-node-protocol
-import { Buffer } from 'buffer'
-import iconv from 'iconv-lite'
+// import { Buffer } from 'buffer'
+// import iconv from 'iconv-lite'
 
 /**
  * 获取 URL 的 params
@@ -30,20 +29,20 @@ export function queryString(obj: Record<string, any>) {
    * @param {Response} stream fetch Response
    * @returns Object
    */
-export function gbk2utf8(stream: any) {
-  return new Promise<string>((resolve) => {
-    const chunks: any[] = []
-    stream.on('data', (chunk: any) => {
-      chunks.push(chunk)
-    })
-    stream.on('end', () => {
-      const decodedBody = iconv.decode(Buffer.concat(chunks), 'gbk')
-      try {
-        resolve(JSON.parse(decodedBody))
-      }
-      catch (error) {
-        resolve('')
-      }
-    })
-  })
-}
+// export function gbk2utf8(stream: any) {
+//   return new Promise<string>((resolve) => {
+//     const chunks: any[] = []
+//     stream.on('data', (chunk: any) => {
+//       chunks.push(chunk)
+//     })
+//     stream.on('end', () => {
+//       const decodedBody = iconv.decode(Buffer.concat(chunks), 'gbk')
+//       try {
+//         resolve(JSON.parse(decodedBody))
+//       }
+//       catch (error) {
+//         resolve('')
+//       }
+//     })
+//   })
+// }
